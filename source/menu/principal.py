@@ -1,3 +1,8 @@
+def headermenu():
+    print('*' * 18)
+    print('* BOB`s Pizzaria *')
+    print('*' * 18)
+
 def principal():
     print('\nMenu\n')
     print('[1] - Realizar Pedido')
