@@ -14,7 +14,6 @@ def main():
 
     while(opcao >= 1 or opcao <= 4):
         if(opcao == 4):
-            os.system('cls')
             headermenu()
             clientmenu()
             break

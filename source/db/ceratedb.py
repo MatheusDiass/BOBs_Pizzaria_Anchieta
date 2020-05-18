@@ -8,15 +8,15 @@ def DbCreate():
     # Create client table
     cursor.execute('create table if not exists tblclient \
                    cli_cod integer primary key\
-                   cli_name varchar(50) \
-                   cli_address varchar(50) \
-                   cli_complement varchar(20) \
-                   cli_district varchar(20) \
-                   cli_city varchar(20) \
-                   cli_uf varchar(2) \
-                   cli_cep varchar(8) \
-                   cli_phone varchar(10) \
-                   cli_cellphone varchar(11)')
+                   cli_name string(50) \
+                   cli_address string(50) \
+                   cli_complement string(20) \
+                   cli_district string(20) \
+                   cli_city string(20) \
+                   cli_uf string(2) \
+                   cli_cep string(8) \
+                   cli_phone string(10) \
+                   cli_cellphone string(11)')
 
     # Create pizza table
     cursor.execute('create table if not exists tblpizza \
