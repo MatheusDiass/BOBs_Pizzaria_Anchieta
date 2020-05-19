@@ -20,14 +20,14 @@ def clientmenu():
 
         elif(optionClient == 1):
             headermenu()
-            clientCadastre()
+            clientcadastre()
             break
 
 
 
 
 
-def clientCadastre():
+def clientcadastre():
 
     print('\nCadastro de Cliente\n')
 
