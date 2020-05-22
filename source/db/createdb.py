@@ -8,17 +8,17 @@ def dbcreate():
     cursor = connection.cursor()
 
     # Create client table
-    cursor.execute('create table if not exists tblclient \
-                   (cli_cod integer not null primary key, \
-                   cli_name string(50), \
-                   cli_address string(50), \
-                   cli_complement string(20), \
-                   cli_district string(20), \
-                   cli_city string(20), \
-                   cli_uf string(2), \
-                   cli_cep string(8), \
-                   cli_phone string(10), \
-                   cli_cellphone string(11))')
+    cursor.execute('create table if not exists tblcustomer \
+                   (cus_cod integer not null primary key, \
+                   cus_name string(50), \
+                   cus_address string(50), \
+                   cus_complement string(20), \
+                   cus_district string(20), \
+                   cus_city string(20), \
+                   cus_uf string(2), \
+                   cus_cep string(9), \
+                   cus_phone string(14), \
+                   cus_cellphone string(13))')
 
     # Create pizza table
     cursor.execute('create table if not exists tblpizza \
