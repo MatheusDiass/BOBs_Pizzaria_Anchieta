@@ -1,3 +1,4 @@
+from source.db.tblPizza import save, updateNomePizza, updateIngredientesPizza, updateValorPizza, updateTipoPizza, deletarPizza, consultaListaPizzas
 
 def pizzaRegister():
     print('\nCadastro de nova pizza\n')
