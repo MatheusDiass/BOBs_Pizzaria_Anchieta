@@ -1,30 +1,29 @@
 import os
-from source.menu.principalMenu import principal, headermenu
-from source.menu.customerMenu import customerMenu
-#from source.db.tblCustomer import searchClient, clientcadastre
-
+from source.menu.principalMenu import principal, headerMenu
+from source.menu.customerMenu import customerMenu, maintenanceMenu
+from source.option.customerOption import chooseOptionMenuClient, chooseOptionMaintenance
 
 def main():
-
-    opcao = 0
-
-    headermenu()
+    headerMenu()
     principal()
 
-    opcao = eval(input('Escolha a opção desejada: '))
+    opcao = int(input('Escolha a opção desejada: '))
 
     while opcao < 1 or opcao > 4:
         print('Opção Inválida!')
         input('Pressione qualquer tecla para continuar...')
+        os.system('cls' if os.name == 'nt' else 'clear')
         main()
-        break
+        #break
 
     else:
         if opcao == 1:
             print(1)
 
         if opcao == 4:
-            headermenu()
+            headerMenu()
             customerMenu()
+            chooseOptionMenuClient()
+
 
 main()

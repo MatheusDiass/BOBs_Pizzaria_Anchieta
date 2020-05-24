@@ -1,10 +1,9 @@
-from source.menu.principalMenu import principal, headermenu
 from source.actions.customerActions import customerRegister, update
 from source.reports.customerReports import allClientInformationReports
 
 # Client Menu
 def customerMenu():
-    optionClient = 0
+    #optionClient = 0
 
     print('\nAções - Cliente\n')
     print('[0] - Voltar')
@@ -13,31 +12,32 @@ def customerMenu():
     print('[3] - Deletar')
     print('[4] - Relatórios')
 
-    optionClient = int(input('Digite a opção desejada:  '))
+    '''optionClient = int(input('Digite a opção desejada:  '))
 
-    while optionClient >= 0 or optionClient <= 4:
+    while optionClient < 0 or optionClient > 4:
+        print('Opção Inválida!')
+        input('Pressione qualquer tecla para continuar...')
+        os.system('cls' if os.name == 'nt' else 'clear')
+        customerMenu()
+        break
+
+    else:
         if optionClient == 0:
             headermenu()
             principal()
-            break
 
         elif optionClient == 1:
             headermenu()
             customerRegister()
             customerMenu()
-            break
 
         elif optionClient == 2:
             headermenu()
             maintenanceMenu()
-            break
 
         elif optionClient == 4:
             headermenu()
-            reportsMenu()
-            break
-
-        #elif optionClient == 3:
+            reportsMenu()'''
 
 
 def maintenanceMenu():
@@ -53,7 +53,7 @@ def maintenanceMenu():
     print('[8] - Alterar Telefone')
     print('[9] - Alterar Celular')
 
-    optionMaintenance = int(input('Digite a opção desejada:  '))
+    '''optionMaintenance = int(input('Digite a opção desejada:  '))
 
     while optionMaintenance >= 0 or optionMaintenance <= 9:
 
@@ -67,7 +67,7 @@ def maintenanceMenu():
             customerMenu()
 
     else:
-        customerMenu()
+        customerMenu()'''
 
 def reportsMenu():
     optionReports = 0
@@ -76,7 +76,7 @@ def reportsMenu():
     print('[0] - Voltar')
     print('[1] - Todos os clientes com todas as informações')
 
-    while optionReports >= 0 or optionReports <= 1:
+    '''while optionReports >= 0 or optionReports <= 1:
         if optionReports == 0:
             headermenu()
             customerMenu()
@@ -84,6 +84,4 @@ def reportsMenu():
 
         elif optionReports == 1:
             allClientInformationReports()
-            break
-
-
+            break'''

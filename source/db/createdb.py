@@ -3,7 +3,7 @@ import _sqlite3
 
 # Database creation
 def dbcreate():
-    path = 'C:\\Users\Matheus Dias\Documents\GitHub_MyProjects\BOBs_Pizzaria_Anchieta\data\db_bobsPizzaria'
+    path = 'C:\\Users\Matheus Dias\Documents\Git_MyProjects\BOBs_Pizzaria_Anchieta\data\db_bobsPizzaria'
     connection = _sqlite3.connect(path)
     cursor = connection.cursor()
 
