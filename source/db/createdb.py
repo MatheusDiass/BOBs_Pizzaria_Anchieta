@@ -1,14 +1,16 @@
 import _sqlite3
-
+from source.db.connection import dbConnection
 
 # Database creation
 def dbcreate():
-    path = 'C:\\Users\Matheus Dias\Documents\Git_MyProjects\BOBs_Pizzaria_Anchieta\data\db_bobsPizzaria'
-    connection = _sqlite3.connect(path)
-    cursor = connection.cursor()
+    #path = 'C:\\Users\Matheus Dias\Documents\Git_MyProjects\BOBs_Pizzaria_Anchieta\data\db_bobsPizzaria'
+    #connection = _sqlite3.connect(path)
+    #cursor = connection.cursor()
 
-    # Create client table
-    cursor.execute('create table if not exists tblcustomer \
+    dict_connection = dbConnection()
+
+    # Criação da tabela de clientes
+    dict_connection['cursor'].execute('create table if not exists tblcustomer \
                    (cus_cod integer not null primary key, \
                    cus_name string(50), \
                    cus_address string(50), \
@@ -20,8 +22,8 @@ def dbcreate():
                    cus_phone string(14), \
                    cus_cellphone string(13))')
 
-    # Create pizza table
-    cursor.execute('create table if not exists tblpizza \
+    # Criação da tabela de pizzas
+    dict_connection['cursor'].execute('create table if not exists tblpizza \
                    (piz_cod integer not null primary key, \
                    piz_name varchar(50), \
                    piz_ingredients text, \
@@ -30,8 +32,8 @@ def dbcreate():
                    piz_inactivated integer, \
                    piz_inactdate datetime)')
 
-    # Create order table
-    cursor.execute('create table if not exists tblorder \
+    # Criação da tabela de pedidos
+    dict_connection['cursor'].execute('create table if not exists tblorder \
                    (ord_cod integer not null primary key, \
                    ord_clicod integer, \
                    ord_date date, \
@@ -39,8 +41,8 @@ def dbcreate():
                    ord_totalorder decimal(10, 2), \
                    constraint fk_orderclient foreign key(ord_cliCod) references tblclient(cli_cod))')
 
-    # Create Order Items table
-    cursor.execute('create table if not exists tblorderitems \
+    # Criação da tabela dos itens dos pedidos
+    dict_connection['cursor'].execute('create table if not exists tblorderitems \
                    (oit_cod integer not null, \
                    oit_ordercod integer not null, \
                    oit_pizzacod integer not null, \
@@ -50,7 +52,7 @@ def dbcreate():
                    constraint fk_orderitem primary key(oit_cod, oit_ordercod), \
                    constraint fk_orderitempizza foreign key(oit_pizzacod) references tblpizza(piz_cod))')
 
-    # Add data to the pizza table
+    # Insere algumas pizzas na tabela
     list_pizza = [('Alho e Óleo', 'Alho frito picado, parmesão ralado e azeitonas', 'Salgada', 22.90, 0),
                   ('Allici', 'Alicci importado, rodelas de tomate, parmesão e azeitonas', 'Salgada', 28.90, 0),
                   ('Atum', 'Atum, cebola e azeitona', 'Salgada', 22.90, 0),
@@ -67,9 +69,9 @@ def dbcreate():
                   ('Brigadeiro', 'Chocolate, leite condensado e chocolate granulado', 'Doce', 23.90, 0),
                   ('Pestígio', 'Chocolate coberto com côco', 'Doce', 23.90, 0)]
 
-    cursor.executemany('insert into tblpizza(piz_name, piz_ingredients, piz_type, piz_price, piz_inactivated) \
+    dict_connection['cursor'].executemany('insert into tblpizza(piz_name, piz_ingredients, piz_type, piz_price, piz_inactivated) \
                         values(?, ?, ?, ?, ?)', list_pizza)
 
-    connection.commit()
+    dict_connection['connection'].commit()
 
 dbcreate()

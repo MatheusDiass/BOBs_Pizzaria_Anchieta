@@ -1,17 +1,19 @@
-from source.db.tblPizza import save, updateNomePizza, updateIngredientesPizza, updateValorPizza, updateTipoPizza, deletarPizza, consultaListaPizzas
+from source.db.tblPizza import save, updateName, updateIngredient, updatePrice, updateType, delete, selectAllPizzaInformation
 
 def pizzaRegister():
-    print('\nCadastro de nova pizza\n')
-
-    tipo = str(input('Digite o tipo: '))
+    print('\nCadastro de pizza\n')
 
     name = str(input('Digite o nome: '))
 
-    ingrediente = str(input('Digite os ingredientes: '))
+    type = str(input('Digite o tipo: '))
 
-    valor = str(input('Digite o valor: '))
+    ingredient = str(input('Digite os ingredientes: '))
 
-    data_pizza = ([name, ingrediente, tipo , valor])
+    price = float(input('Digite o valor: '))
+
+    inactvated = 0
+
+    data_pizza = ([name, ingredient, type , price, inactvated])
 
     try:
         save(data_pizza)
@@ -22,16 +24,16 @@ def pizzaRegister():
         print('Contate o administrador.\n')
         input('Pressione qualquer tecla para continuar...')
 
-def updatePizza(option):
+def update(option):
 
     if option == 1:
         print('\nAtualizar Nome\n')
 
         cod = int(input('Digite o código da pizza: '))
-        nome = str(input('Digite o novo nome para a pizza: '))
+        name = str(input('Digite o novo nome para a pizza: '))
 
         try:
-            updateNomePizza(cod,nome)
+            updateName(cod, name)
             print('Nome da pizza atualizado com sucesso\n')
             input('Pressione qualquer tecla para continuar...')
         except:
@@ -41,10 +43,10 @@ def updatePizza(option):
     elif option == 2:
         print('\nAtualizar ingredientes\n')
         cod = int(input('Digite o código da pizza: '))
-        ingredientes = str(input('Digite os novos ingredientes para a pizza: '))
+        ingredient = str(input('Digite os novos ingredientes para a pizza: '))
 
         try:
-            updateIngredientesPizza(cod,ingredientes)
+            updateIngredient(cod, ingredient)
             print('Ingredientes da pizza atualizados com sucesso\n')
             input('Pressione qualquer tecla para continuar...')
         except:
@@ -54,10 +56,10 @@ def updatePizza(option):
     elif option == 3:
         print('\nAtualizar Valor\n')
         cod = int(input('Digite o código da pizza: '))
-        valor = int(input('Digite o novo valor para a pizza: '))
+        price = int(input('Digite o novo valor para a pizza: '))
 
         try:
-            updateValorPizza(cod,valor)
+            updatePrice(cod, price)
             print('Valor da pizza atualizado com sucesso\n')
             input('Pressione qualquer tecla para continuar...')
         except:
@@ -67,40 +69,23 @@ def updatePizza(option):
     elif option == 4:
         print('\nAtualizar Tipo\n')
         cod = int(input('Digite o código da pizza: '))
-        tipo = str(input('Digite o novo tipo para a pizza: '))
+        type = str(input('Digite o novo tipo para a pizza: '))
 
         try:
-            updateTipoPizza(cod,tipo)
+            updateType(cod, type)
             print('Tipo da pizza atualizado com sucesso\n')
             input('Pressione qualquer tecla para continuar...')
         except:
             print('Não foi possivel executar a alteração...')
             input('Pressione qualquer tecla para continuar...')
 
-def deletarPizza(cod):
+def delete(cod):
     try:
-        deletarCod(cod)
+        delete(cod)
         print('Pizza deletada')
         input('Pressione qualquer tecla para continuar...')
     except:
         print('Não foi possivel executar a alteração...')
-        input('Pressione qualquer tecla para continuar...')
-
-def consultaListaPizzas():
-    try:
-        lista = todasPizzas()
-        print('\nPizzas\n')
-        for piz in lista:
-            print('Cod: ',piz[0])
-            print('Nome: ',piz[1])
-            print('Ingredientes: ',piz[2])
-            print('Tipo: ',piz[3])
-            print('Valor: ',piz[4])
-            print('Data Inatividade: ',piz[5])
-            print('Data Criação: ',piz[6])
-        input('Pressione qualquer tecla para continuar...')
-    except:
-        print('Não foi possivel acessar as pizzas')
         input('Pressione qualquer tecla para continuar...')
 
 

@@ -4,22 +4,22 @@ from source.db.tblCustomer import selectAllClientInformation
 def allClientInformationReports():
     listAllClientInformation = selectAllClientInformation()
 
-    print('----------------------------------------------------------')
+    print('--------------------------------------------')
     print('\nRelatório de Clientes - Todos os Dados\n')
 
     if len(listAllClientInformation) == 0:
-        print('Não existem clientes cadastrados\n')
+        print('Não existem clientes cadastrados!\n')
 
     else:
-        for clint in listAllClientInformation:
-            print('Cod: ', clint[0])
-            print('Nome: ', clint[1])
-            print('Endereço: ', clint[2])
-            print('Complemento: ', clint[3])
-            print('Bairro: ', clint[4])
-            print('Cidade: ', clint[5])
-            print('UF: ', clint[6])
-            print('CEP: ', clint[7])
-            print('Telefone: ', clint[8])
-            print('Celular: ', clint[9])
+        for customer in listAllClientInformation:
+            print('Cod: ', customer[0])
+            print('Nome: ', customer[1])
+            print('Endereço: ', customer[2])
+            print('Complemento: ', customer[3])
+            print('Bairro: ', customer[4])
+            print('Cidade: ', customer[5])
+            print('UF: ', customer[6])
+            print('CEP: ', customer[7])
+            print('Telefone: ', customer[8])
+            print('Celular: ', customer[9])
             print('\n')

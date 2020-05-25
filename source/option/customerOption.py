@@ -1,11 +1,10 @@
 import os
 from source.menu.principalMenu import headerMenu, principal
-from source.menu.customerMenu import customerMenu, customerRegister, maintenanceMenu, reportsMenu
+from source.menu.customerMenu import customerMenu, customerMaintenanceMenu, customerReportsMenu
 from source.actions.customerActions import customerRegister, update
 from source.reports.customerReports import allClientInformationReports
 
 def chooseOptionMenuClient():
-
     optionClient = int(input('Digite a opção desejada:  '))
 
     while optionClient < 0 or optionClient > 4:
@@ -28,12 +27,12 @@ def chooseOptionMenuClient():
 
         elif optionClient == 2:
             headerMenu()
-            maintenanceMenu()
+            customerMaintenanceMenu()
             chooseOptionMaintenance()
 
         elif optionClient == 4:
             headerMenu()
-            reportsMenu()
+            customerReportsMenu()
             chooseOptionReports()
 
 def chooseOptionMaintenance():
@@ -43,7 +42,7 @@ def chooseOptionMaintenance():
         print('Opção Inválida!')
         input('Pressione qualquer tecla para continuar...')
         os.system('cls' if os.name == 'nt' else 'clear')
-        maintenanceMenu()
+        customerMaintenanceMenu()
         chooseOptionMaintenance()
         break
 
@@ -65,7 +64,7 @@ def chooseOptionReports():
         print('Opção Inválida!')
         input('Pressione qualquer tecla para continuar...')
         os.system('cls' if os.name == 'nt' else 'clear')
-        reportsMenu()
+        customerReportsMenu()
         chooseOptionReports()
         break
 

@@ -1,39 +1,17 @@
-from source.menu.principalMenu import principal, headermenu
-from source.action.pizzaActions import updatePizza, pizzaRegister , deletarPizza , consultaListaPizza
+#from source.menu.principalMenu import principal, headermenu
+#from source.action.pizzaActions import updatePizza, pizzaRegister , deletarPizza , consultaListaPizza
 
 def pizzaMenu():
     option = 0
 
-    print('\nAções - Cliente\n')
+    print('\nAções - Pizza\n')
     print('[0] - Voltar')
-    print('[1] - Incluir')
+    print('[1] - Cadastrar')
     print('[2] - Manutenção')
     print('[3] - Deletar')
-    print('[4] - Consultar')
+    print('[4] - Relatórios')
 
-    option = int(input('Digite a opção desejada:  '))
-
-    while option >= 0 or option <= 4:
-        if option == 0:
-            headermenu()
-            principal()
-            break
-
-    elif option == 1:
-        pizzaRegister()
-        headermenu()
-        break
-
-    elif option == 2:
-        pizzaUpdateMenu()    
-        break
-
-    elif option == 4:
-       
-        break
-
-
-def pizzaUpdateMenu():
+def pizzaMaintenanceMenu():
     option = 0
 
     print('\nManutenção - Pizza\n')
@@ -43,21 +21,7 @@ def pizzaUpdateMenu():
     print('[3] - Alterar Valor')
     print('[4] - Alterar Tipo')
 
-    option = int(input('Digite a opção desejada:  '))
-
-    while option >= 0 or option <= 9:
-        if(option == 0):
-             headermenu()
-            customerMenu()
-        else:
-            updatePizza(option)
-            headermenu()
-            customerMenu()
-        
-    else:
-        pizzaUpdateMenu()
-
-def pizzaDeleteMenu():
+'''def delete():
     print('\nDeletar - Pizza\n')
 
     cod = int(input('Digite o codigo da pizza:  '))
@@ -68,12 +32,12 @@ def pizzaDeleteMenu():
         customerMenu()
     else:
         print('Codigo invalido...')
-        pizzaUpdateMenu()
+        pizzaUpdateMenu()'''
 
-def pizzaConsultaMenu():
-    print('\nConsulta - Pizza\n')
-
-    consultaListaPizza()
+def pizzaReportsMenu():
+    print('\nRelátorios - Pizzas\n')
+    print('[0] - Voltar')
+    print('[1] - Todos as pizzas com todas as informações')
 
 
 

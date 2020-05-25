@@ -7,7 +7,7 @@ def customerMenu():
 
     print('\nAções - Cliente\n')
     print('[0] - Voltar')
-    print('[1] - Cadastro')
+    print('[1] - Cadastrar')
     print('[2] - Manutenção')
     print('[3] - Deletar')
     print('[4] - Relatórios')
@@ -40,7 +40,7 @@ def customerMenu():
             reportsMenu()'''
 
 
-def maintenanceMenu():
+def customerMaintenanceMenu():
     print('\nManutenção - Cliente\n')
     print('[0] - Voltar')
     print('[1] - Alterar Nome')
@@ -69,7 +69,7 @@ def maintenanceMenu():
     else:
         customerMenu()'''
 
-def reportsMenu():
+def customerReportsMenu():
     optionReports = 0
 
     print('\nRelátorios - Cliente\n')
