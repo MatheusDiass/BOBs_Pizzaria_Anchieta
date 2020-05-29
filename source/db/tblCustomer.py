@@ -1,7 +1,7 @@
-import _sqlite3
+# Importa a função de conexão do arquivo de conexão
 from source.db.connection import dbConnection
 
-# Cadastre of the clients
+# Realiza o cadastro do cliente
 def save(data_client):
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('insert into tblcustomer(cus_name, cus_address, cus_complement, cus_district, cus_city, cus_uf, cus_cep, cus_phone, cus_cellphone) \
@@ -12,6 +12,7 @@ def save(data_client):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
+# Atualiza o nome
 def updateName(cod, name):
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('update tblcustomer set cus_name = ? where cus_cod = ?', (name, cod))
@@ -20,6 +21,7 @@ def updateName(cod, name):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
+# Atualiza o endereço
 def updateAddress(cod, address):
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('update tblcustomer set cus_address = ? where cus_cod = ?', (address, cod))
@@ -28,6 +30,7 @@ def updateAddress(cod, address):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
+# Atualiza o complemento
 def updateComplement(cod, complement):
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('update tblcustomer set cus_complement = ? where cus_cod = ?', (complement, cod))
@@ -36,6 +39,7 @@ def updateComplement(cod, complement):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
+# Atualiza o bairro
 def updateDistrict(cod, district):
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('update tblcustomer set cus_district = ? where cus_cod = ?', (district, cod))
@@ -44,6 +48,7 @@ def updateDistrict(cod, district):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
+# Atualiza a cidade
 def updateCity(cod, city):
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('update tblcustomer set cus_city = ? where cus_cod = ?', (city, cod))
@@ -52,6 +57,7 @@ def updateCity(cod, city):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
+# Atualiza o UF
 def updateUf(cod, uf):
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('update tblcustomer set cus_uf = ? where cus_cod = ?', (uf, cod))
@@ -60,6 +66,7 @@ def updateUf(cod, uf):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
+# Atualiza o CEP
 def updateCep(cod, cep):
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('update tblcustomer set cus_cep = ? where cus_cod = ?', (cep, cod))
@@ -68,6 +75,7 @@ def updateCep(cod, cep):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
+# Atualiza o telefone
 def updatePhone(cod, phone):
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('update tblcustomer set cus_phone = ? where cus_cod = ?', (phone, cod))
@@ -76,6 +84,7 @@ def updatePhone(cod, phone):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
+# Atualiza o telefone celular
 def updateCellPhone(cod, cellPhone):
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('update tblcustomer set cus_cellphone = ? where cus_cod = ?', (cellPhone, cod))
@@ -84,23 +93,27 @@ def updateCellPhone(cod, cellPhone):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
+# Busca todos os clientes junto de todas as suas informações
 def selectAllClientInformation():
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('select * from tblcustomer')
 
     listAllClientInformation = dict_connection['cursor'].fetchall()
 
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
     return listAllClientInformation
 
-# Search clients by Phone
-'''def searchClient():
-    print('\nProcurar por Cliente\n')
-
-    phoneClient = str(input('Digite o telefone do cliente: '))
-
-    cursor.execute('select * from tblclient where cli_phone like ? or cli_cellphone like ?',
+# Busca o cliente pelo telefone ou telefone celular
+def searchClientByPhone(phoneClient):
+    dict_connection = dbConnection()
+    dict_connection['cursor'].execute('select * from tblcustomer where cus_phone like ? or cus_cellphone like ?',
                    ('%' + phoneClient + '%', '%' + phoneClient + '%'))
 
-    list_search = cursor.fetchall()
+    oneClient = dict_connection['cursor'].fetchone()
 
-    return list_search'''
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
+    return oneClient

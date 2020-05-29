@@ -1,5 +1,7 @@
-from source.db.tblPizza import save, updateName, updateIngredient, updatePrice, updateType, delete, selectAllPizzaInformation
+# Importa as funções do arquivo da tabela tblpizza para interagir com o banco de dados
+from source.db.tblPizza import save, updateName, updateIngredient, updatePrice, updateType, delete
 
+# Salva a pizza no banco de dados e trata a exceção caso ocorrer algum erro
 def pizzaRegister():
     print('\nCadastro de pizza\n')
 
@@ -24,8 +26,10 @@ def pizzaRegister():
         print('Contate o administrador.\n')
         input('Pressione qualquer tecla para continuar...')
 
+# Atualiza as informações da pizza de acordo com o número selecinado
 def update(option):
 
+    # Número 1 para atualizar o nome
     if option == 1:
         print('\nAtualizar Nome\n')
 
@@ -38,8 +42,9 @@ def update(option):
             input('Pressione qualquer tecla para continuar...')
         except:
             print('Não foi possivel executar a alteração...')
-            input('Pressione qualquer tecla para continuar...') 
+            input('Pressione qualquer tecla para continuar...')
 
+    # Número 2 para atualizar os ingredientes
     elif option == 2:
         print('\nAtualizar ingredientes\n')
         cod = int(input('Digite o código da pizza: '))
@@ -52,7 +57,8 @@ def update(option):
         except:
             print('Não foi possivel executar a alteração...')
             input('Pressione qualquer tecla para continuar...')
-    
+
+    # Número 3 para atualizar o valor
     elif option == 3:
         print('\nAtualizar Valor\n')
         cod = int(input('Digite o código da pizza: '))
@@ -66,6 +72,7 @@ def update(option):
             print('Não foi possivel executar a alteração...')
             input('Pressione qualquer tecla para continuar...')
 
+    # Número 4 para atualizar o tipo
     elif option == 4:
         print('\nAtualizar Tipo\n')
         cod = int(input('Digite o código da pizza: '))
@@ -79,6 +86,7 @@ def update(option):
             print('Não foi possivel executar a alteração...')
             input('Pressione qualquer tecla para continuar...')
 
+# Deleta a pizza do banco de dados
 def delete(cod):
     try:
         delete(cod)

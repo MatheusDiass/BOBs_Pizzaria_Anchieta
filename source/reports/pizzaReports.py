@@ -1,5 +1,7 @@
+# Importa a função de relatório de pizza do arquivo da tabela tblpizza
 from source.db.tblPizza import selectAllPizzaInformation
 
+# Exibe o relatório de pizza
 def allPizzaInformationReports():
     try:
         print('--------------------------------------------')

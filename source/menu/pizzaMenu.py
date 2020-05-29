@@ -1,9 +1,5 @@
-#from source.menu.principalMenu import principal, headermenu
-#from source.action.pizzaActions import updatePizza, pizzaRegister , deletarPizza , consultaListaPizza
-
+# Exibe na tela o menu principal de pizzas
 def pizzaMenu():
-    option = 0
-
     print('\nAções - Pizza\n')
     print('[0] - Voltar')
     print('[1] - Cadastrar')
@@ -11,9 +7,8 @@ def pizzaMenu():
     print('[3] - Deletar')
     print('[4] - Relatórios')
 
+# Exibe na tela o menu de manutenção de pizzas
 def pizzaMaintenanceMenu():
-    option = 0
-
     print('\nManutenção - Pizza\n')
     print('[0] - Voltar')
     print('[1] - Alterar Nome')
@@ -21,19 +16,7 @@ def pizzaMaintenanceMenu():
     print('[3] - Alterar Valor')
     print('[4] - Alterar Tipo')
 
-'''def delete():
-    print('\nDeletar - Pizza\n')
-
-    cod = int(input('Digite o codigo da pizza:  '))
-
-     while option >= 0:
-        deletarPizza(option)
-        headermenu()
-        customerMenu()
-    else:
-        print('Codigo invalido...')
-        pizzaUpdateMenu()'''
-
+# Exibe na tela o menu de relatórios de pizzas
 def pizzaReportsMenu():
     print('\nRelátorios - Pizzas\n')
     print('[0] - Voltar')

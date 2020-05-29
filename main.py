@@ -1,5 +1,6 @@
 import os
 from source.menu.principalMenu import principal, headerMenu
+from source.actions.requestAction import request
 from source.menu.customerMenu import customerMenu
 from source.menu.pizzaMenu import pizzaMenu
 from source.option.customerOption import chooseOptionMenuClient
@@ -15,12 +16,13 @@ def main():
         print('Opção Inválida!')
         input('Pressione qualquer tecla para continuar...')
         os.system('cls' if os.name == 'nt' else 'clear')
-        main()
-        break
+        headerMenu()
+        principal()
+        option = int(input('Escolha a opção desejada: '))
 
     else:
         if option == 1:
-            print(1)
+            request()
 
         elif option == 3:
             headerMenu()
@@ -31,6 +33,5 @@ def main():
             headerMenu()
             customerMenu()
             chooseOptionMenuClient()
-
 
 main()

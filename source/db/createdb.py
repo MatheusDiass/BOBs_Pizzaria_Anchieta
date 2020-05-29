@@ -1,12 +1,8 @@
-import _sqlite3
+# Importa a função de conexão do arquivo de conexão
 from source.db.connection import dbConnection
 
-# Database creation
+# Criação do Banco de Dados
 def dbcreate():
-    #path = 'C:\\Users\Matheus Dias\Documents\Git_MyProjects\BOBs_Pizzaria_Anchieta\data\db_bobsPizzaria'
-    #connection = _sqlite3.connect(path)
-    #cursor = connection.cursor()
-
     dict_connection = dbConnection()
 
     # Criação da tabela de clientes
@@ -32,27 +28,32 @@ def dbcreate():
                    piz_inactivated integer, \
                    piz_inactdate datetime)')
 
+    # Criação da tabela de tamanho de pizzas
+    dict_connection['cursor'].execute('create table if not exists tblpizzasize \
+                       (pis_cod integer not null primary key, \
+                       pis_name varchar(20))')
+
     # Criação da tabela de pedidos
     dict_connection['cursor'].execute('create table if not exists tblorder \
                    (ord_cod integer not null primary key, \
                    ord_clicod integer, \
-                   ord_date date, \
-                   ord_time time, \
+                   ord_datetime datetime, \
                    ord_totalorder decimal(10, 2), \
                    constraint fk_orderclient foreign key(ord_cliCod) references tblclient(cli_cod))')
 
     # Criação da tabela dos itens dos pedidos
     dict_connection['cursor'].execute('create table if not exists tblorderitems \
-                   (oit_cod integer not null, \
+                   (oit_cod integer not null primary key, \
                    oit_ordercod integer not null, \
                    oit_pizzacod integer not null, \
-                   oit_size string(10), \
+                   oit_size int, \
                    oit_uniprice decimal(10, 2), \
                    oit_totalprice decimal(10, 2), \
-                   constraint fk_orderitem primary key(oit_cod, oit_ordercod), \
-                   constraint fk_orderitempizza foreign key(oit_pizzacod) references tblpizza(piz_cod))')
+                   constraint fk_orderitempizza foreign key(oit_ordercod) references tblorder(ord_cod), \
+                   constraint fk_orderitempizza foreign key(oit_pizzacod) references tblpizza(piz_cod), \
+                   constraint fk_orderitemsize foreign key(oit_size) references tblpizzasize(pis_cod))')
 
-    # Insere algumas pizzas na tabela
+    # Insere algumas pizzas na tabela tblpizza
     list_pizza = [('Alho e Óleo', 'Alho frito picado, parmesão ralado e azeitonas', 'Salgada', 22.90, 0),
                   ('Allici', 'Alicci importado, rodelas de tomate, parmesão e azeitonas', 'Salgada', 28.90, 0),
                   ('Atum', 'Atum, cebola e azeitona', 'Salgada', 22.90, 0),
@@ -72,6 +73,14 @@ def dbcreate():
     dict_connection['cursor'].executemany('insert into tblpizza(piz_name, piz_ingredients, piz_type, piz_price, piz_inactivated) \
                         values(?, ?, ?, ?, ?)', list_pizza)
 
+    # Insere os tamanhos de pizza noa tabela tblpizzasize
+    list_pizzasize = [('Médio',),
+                      ('Grande',),
+                      ('Gigante',)]
+
+    dict_connection['cursor'].executemany('insert into tblpizzasize(pis_name) values(?)', list_pizzasize)
+
     dict_connection['connection'].commit()
 
+# Chama a função de criação
 dbcreate()

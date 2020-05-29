@@ -1,6 +1,7 @@
+# Importa a função de relatório de cliente do arquivo da tabela tblcustomer
 from source.db.tblCustomer import selectAllClientInformation
 
-# Report with all information of the all clients
+# Exibe o relatório de cliente
 def allClientInformationReports():
     listAllClientInformation = selectAllClientInformation()
 

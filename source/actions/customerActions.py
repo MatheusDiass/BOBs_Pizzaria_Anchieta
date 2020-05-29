@@ -1,6 +1,10 @@
-from source.db.tblCustomer import save, selectAllClientInformation, updateName, updateAddress, updateComplement, updateDistrict, updateCity, updateUf, updateCep, updatePhone, updateCellPhone
+# Importa as funções do arquivo da tabela tblcustomer para interagir com o banco de dados
+from source.db.tblCustomer import save, updateName, updateAddress, updateComplement, updateDistrict, updateCity, updateUf, updateCep, updatePhone, updateCellPhone
+
+# Importa as funções de validação do arquivo de validação do cliente
 from source.validation.customerValidation import nameValidation, addressValidation, complementValidation, districtValidation, cityValidation, ufValidation, cepValidation, phoneValidation, cellPhoneValidation
 
+# Salva o cliente no banco de dados e trata a exceção caso ocorrer algum erro
 def customerRegister():
     print('\nCadastro de Cliente\n')
 
@@ -45,9 +49,11 @@ def customerRegister():
         print('Contate o administrador.\n')
         input('Pressione qualquer tecla para continuar...')
 
-def update(cod):
+# Atualiza as informações do cliente de acordo com o número selecinado
+def update(option):
 
-    if cod == 1:
+    # Número 1 para atualizar o nome
+    if option == 1:
         print('\nAtualizar Nome\n')
         cod = int(input('Digite o código do cliente: '))
         name = str(input('Digite o nome: '))
@@ -59,7 +65,8 @@ def update(cod):
         print('\nNome atualizado com sucesso!\n')
         input('Pressione qualquer tecla para continuar...')
 
-    elif cod == 2:
+    # Número 2 para atualizar o endereço
+    elif option == 2:
         print('\nAtualizar Endereço\n')
         cod = int(input('Digite o código do cliente: '))
         address = str(input('Digite o endereço: '))
@@ -71,7 +78,8 @@ def update(cod):
         print('\nEndereço atualizado com sucesso!\n')
         input('Pressione qualquer tecla para continuar...')
 
-    elif cod == 3:
+    # Número 3 para atualizar o complemento
+    elif option == 3:
         print('\nAtualizar Complemento\n')
         cod = int(input('Digite o código do cliente: '))
         complement = str(input('Digite o complemento: '))
@@ -83,7 +91,8 @@ def update(cod):
         print('\nComplemento atualizado com sucesso!\n')
         input('Pressione qualquer tecla para continuar...')
 
-    elif cod == 4:
+    # Número 4 para atualizar o bairro
+    elif option == 4:
         print('\nAtualizar Bairro\n')
         cod = int(input('Digite o código do cliente: '))
         district = str(input('Digite o bairro: '))
@@ -95,7 +104,8 @@ def update(cod):
         print('\nBairro atualizado com sucesso!\n')
         input('Pressione qualquer tecla para continuar...')
 
-    elif cod == 5:
+    # Número 5 para atualizar a cidade
+    elif option == 5:
         print('\nAtualizar Cidade\n')
         cod = int(input('Digite o código do cliente: '))
         city = str(input('Digite a cidade: '))
@@ -107,7 +117,8 @@ def update(cod):
         print('\nCidade atualizada com sucesso!\n')
         input('Pressione qualquer tecla para continuar...')
 
-    elif cod == 6:
+    # Número 6 para atualizar o UF
+    elif option == 6:
         print('\nAtualizar UF\n')
         cod = int(input('Digite o código do cliente: '))
         uf = str(input('Digite o UF: '))
@@ -119,7 +130,8 @@ def update(cod):
         print('\nUF atualizado com sucesso!\n')
         input('Pressione qualquer tecla para continuar...')
 
-    elif cod == 7:
+    # Número 7 para atualizar o CEP
+    elif option == 7:
         print('\nAtualizar CEP\n')
         cod = int(input('Digite o código do cliente: '))
         print('Exemplo: 12345-678')
@@ -132,7 +144,8 @@ def update(cod):
         print('\nCEP atualizado com sucesso!\n')
         input('Pressione qualquer tecla para continuar...')
 
-    elif cod == 8:
+    # Número 8 para atualizar o telefone
+    elif option == 8:
         print('\nAtualizar Número do Telefone\n')
         cod = int(input('Digite o código do cliente: '))
         print('Exemplo: (11)4578-9123')
@@ -145,7 +158,8 @@ def update(cod):
         print('\nNúmero do telefone atualizado com sucesso!\n')
         input('Pressione qualquer tecla para continuar...')
 
-    elif cod == 9:
+    # Número 9 para atualizar o telefone celular
+    elif option == 9:
         print('\nAtualizar Número do Celular\n')
         cod = int(input('Digite o código do cliente: '))
         print('Exemplo: (11)98578-9123')

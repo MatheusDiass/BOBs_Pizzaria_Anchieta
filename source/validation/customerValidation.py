@@ -1,3 +1,4 @@
+# Válida o que foi digitado no nome
 def nameValidation(name):
     while len(name) < 8 or len(name) > 50:
         print('O nome deve ser maior ou igual á 8 caracteres e menor ou igual á 50 caracteres!')
@@ -5,6 +6,7 @@ def nameValidation(name):
 
     return name
 
+# Válida o que foi digitado no endereço
 def addressValidation(address):
     while len(address) < 8 or len(address) > 50:
         print('O endereço deve ser maior ou igual á 8 caracteres e menor ou igual á 50 caracteres!')
@@ -12,6 +14,7 @@ def addressValidation(address):
 
     return address
 
+# Válida o que foi digitado no complemento
 def complementValidation(complement):
     while len(complement) < 4 or len(complement) > 20:
         print('O complemento deve ser maior ou igual á 4 caracteres e menor ou igual á 20 caracteres!')
@@ -19,6 +22,7 @@ def complementValidation(complement):
 
     return complement
 
+# Válida o que foi digitado no bairro
 def districtValidation(district):
     while len(district) < 5 or len(district) > 20:
         print('O bairro deve ser maior ou igual á 5 caracteres e menor ou igual á 20 caracteres!')
@@ -26,6 +30,7 @@ def districtValidation(district):
 
     return district
 
+# Válida o que foi digitado na cidade
 def cityValidation(city):
     while len(city) < 3 or len(city) > 20:
         print('A cidade deve ser maior ou igual á 3 caracteres e menor ou igual á 20 caracteres!')
@@ -33,6 +38,7 @@ def cityValidation(city):
 
     return city
 
+# Válida o que foi digitado no UF
 def ufValidation(uf):
     while len(uf) != 2:
         print('O UF deve ter 2 caracteres!')
@@ -40,6 +46,7 @@ def ufValidation(uf):
 
     return uf.upper()
 
+# Válida o que foi digitado no CEP
 def cepValidation(cep):
     while len(cep) != 9:
         print('O CEP deve ter 8 números e um traço depois dos 5 primeiros números!')
@@ -48,6 +55,7 @@ def cepValidation(cep):
 
     return cep
 
+# Válida o que foi digitado no telefone
 def phoneValidation(phone):
     while len(phone) != 13:
         print('Verifique o exemplo!')
@@ -56,6 +64,7 @@ def phoneValidation(phone):
 
     return phone
 
+# Válida o que foi digitado no telefone celular
 def cellPhoneValidation(cellPhone):
     while len(cellPhone) != 14:
         print('Verifique o exemplo!')
