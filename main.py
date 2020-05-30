@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import os
 from source.menu.principalMenu import principal, headerMenu
 from source.actions.requestAction import request
@@ -5,6 +7,8 @@ from source.menu.customerMenu import customerMenu
 from source.menu.pizzaMenu import pizzaMenu
 from source.option.customerOption import chooseOptionMenuClient
 from source.option.pizzaOption import chooseOptionMenuPizza
+from source.menu.orderMenu import orderMenu
+from source.option.orderOption import chooseOptionOrderMenu
 
 def main():
     headerMenu()
@@ -23,6 +27,11 @@ def main():
     else:
         if option == 1:
             request()
+
+        elif option == 2:
+            headerMenu()
+            orderMenu()
+            chooseOptionOrderMenu()
 
         elif option == 3:
             headerMenu()
