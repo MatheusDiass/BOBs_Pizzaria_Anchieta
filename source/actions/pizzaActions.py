@@ -22,7 +22,7 @@ def pizzaRegister():
         print('\nPizza salva com sucesso!\n')
         input('Pressione qualquer tecla para continuar...')
     except:
-        print('Ocorreu um erro ao cadastrar a pizza.')
+        print('\nOcorreu um erro ao cadastrar a pizza.')
         print('Contate o administrador.\n')
         input('Pressione qualquer tecla para continuar...')
 
@@ -38,10 +38,10 @@ def update(option):
 
         try:
             updateName(cod, name)
-            print('Nome da pizza atualizado com sucesso\n')
+            print('\nNome da pizza atualizado com sucesso\n')
             input('Pressione qualquer tecla para continuar...')
         except:
-            print('Não foi possivel executar a alteração...')
+            print('\nNão foi possivel executar a alteração...\n')
             input('Pressione qualquer tecla para continuar...')
 
     # Número 2 para atualizar os ingredientes
@@ -52,24 +52,24 @@ def update(option):
 
         try:
             updateIngredient(cod, ingredient)
-            print('Ingredientes da pizza atualizados com sucesso\n')
+            print('\nIngredientes da pizza atualizados com sucesso\n')
             input('Pressione qualquer tecla para continuar...')
         except:
-            print('Não foi possivel executar a alteração...')
+            print('\nNão foi possivel executar a alteração...\n')
             input('Pressione qualquer tecla para continuar...')
 
     # Número 3 para atualizar o valor
     elif option == 3:
         print('\nAtualizar Valor\n')
         cod = int(input('Digite o código da pizza: '))
-        price = int(input('Digite o novo valor para a pizza: '))
+        price = float(input('Digite o novo valor para a pizza: '))
 
         try:
             updatePrice(cod, price)
-            print('Valor da pizza atualizado com sucesso\n')
+            print('\nValor da pizza atualizado com sucesso\n')
             input('Pressione qualquer tecla para continuar...')
         except:
-            print('Não foi possivel executar a alteração...')
+            print('\nNão foi possivel executar a alteração...\n')
             input('Pressione qualquer tecla para continuar...')
 
     # Número 4 para atualizar o tipo
@@ -80,10 +80,10 @@ def update(option):
 
         try:
             updateType(cod, type)
-            print('Tipo da pizza atualizado com sucesso\n')
+            print('\nTipo da pizza atualizado com sucesso\n')
             input('Pressione qualquer tecla para continuar...')
         except:
-            print('Não foi possivel executar a alteração...')
+            print('\nNão foi possivel executar a alteração...\n')
             input('Pressione qualquer tecla para continuar...')
 
 # Deleta a pizza do banco de dados

@@ -1,5 +1,7 @@
 import os
+from source.actions.cleanAction import cleanScreem
 from source.menu.principalMenu import principal, headerMenu
+from source.option.principalOption import chooseOptionMenuPrincipal
 from source.actions.requestAction import request
 from source.menu.customerMenu import customerMenu
 from source.menu.pizzaMenu import pizzaMenu
@@ -7,10 +9,12 @@ from source.option.customerOption import chooseOptionMenuClient
 from source.option.pizzaOption import chooseOptionMenuPizza
 
 def main():
+    cleanScreem()
     headerMenu()
     principal()
+    chooseOptionMenuPrincipal()
 
-    option = int(input('Escolha a opção desejada: '))
+    '''option = int(input('Escolha a opção desejada: '))
 
     while option < 1 or option > 4:
         print('Opção Inválida!')
@@ -32,6 +36,6 @@ def main():
         elif option == 4:
             headerMenu()
             customerMenu()
-            chooseOptionMenuClient()
+            chooseOptionMenuClient()'''
 
 main()

@@ -1,4 +1,6 @@
-import os
+# Importa a função de limpar tela
+from source.actions.cleanAction import cleanScreem
+
 # Importa as funções que exibe o cabeçalho e o menu principal do arquivo de menu principal
 from source.menu.principalMenu import headerMenu, principal
 
@@ -18,33 +20,54 @@ def chooseOptionMenuPizza():
     while optionPizza < 0 or optionPizza > 4:
         print('Opção Inválida!')
         input('Pressione qualquer tecla para continuar...')
-        os.system('cls' if os.name == 'nt' else 'clear')
+        cleanScreem()
         pizzaMenu()
         chooseOptionMenuPizza()
-        break
 
     else:
 
         # Número 0 volta ao menu principal
         if optionPizza == 0:
+            # Importa o arquivo de opções do menu principal e a função que realiza a escolha
+            from source.option.principalOption import chooseOptionMenuPrincipal
+            cleanScreem()
             headerMenu()
             principal()
+            chooseOptionMenuPrincipal()
 
         # Número 1 para cadastrar a pizza
         elif optionPizza == 1:
             pizzaRegister()
             headerMenu()
+            pizzaMenu()
+            chooseOptionMenuPizza()
 
         # número 2 para entrar no menu de manutenção de pizza
         elif optionPizza == 2:
+            cleanScreem()
+            headerMenu()
             pizzaMaintenanceMenu()
             chooseOptionMaintenancePizza()
 
+            # Após terminar, limpa a tela e exibe o menu de pizzas novamente
+            cleanScreem()
+            headerMenu()
+            pizzaMenu()
+            chooseOptionMenuPizza()
+
         # número 4 para entrar no menu de relatório de pizza
         elif optionPizza == 4:
+            cleanScreem()
             headerMenu()
             pizzaReportsMenu()
             chooseOptionReportsPizza()
+            input('Pressione o enter para continuar...')
+
+            # Após terminar, limpa a tela e exibe o menu de pizzas novamente
+            cleanScreem()
+            headerMenu()
+            pizzaMenu()
+            chooseOptionMenuPizza()
 
 # De acordo com o número informado entra em uma das opções do menu de manutenção de pizza
 def chooseOptionMaintenancePizza():
@@ -53,23 +76,22 @@ def chooseOptionMaintenancePizza():
     while optionMaintenance < 0 or optionMaintenance > 4:
         print('Opção Inválida!')
         input('Pressione qualquer tecla para continuar...')
-        os.system('cls' if os.name == 'nt' else 'clear')
+        cleanScreem()
         pizzaMaintenanceMenu()
         chooseOptionMaintenancePizza()
-        break
 
     else:
 
         # Número 0 volta ao menu principal de pizza
         if optionMaintenance == 0:
+            cleanScreem()
             headerMenu()
             pizzaMenu()
+            chooseOptionMenuPizza()
 
         # Os números de 1 á 4 são utilizados para atualizar alguma informação da pizza
         else:
             update(optionMaintenance)
-            headerMenu()
-            pizzaMenu()
 
 # De acordo com o número informado entra em uma das opções do menu de relatório de pizza
 def chooseOptionReportsPizza():
@@ -78,18 +100,20 @@ def chooseOptionReportsPizza():
     while optionReports < 0 or optionReports > 1:
         print('Opção Inválida!')
         input('Pressione qualquer tecla para continuar...')
-        os.system('cls' if os.name == 'nt' else 'clear')
+        cleanScreem()
         pizzaReportsMenu()
         chooseOptionReportsPizza()
-        break
 
     else:
 
         # Número 0 volta ao menu principal de pizza
         if optionReports == 0:
+            cleanScreem()
             headerMenu()
             pizzaMenu()
+            chooseOptionMenuPizza()
 
         # Número 1 exibe na tela o relatório
         elif optionReports == 1:
             allPizzaInformationReports()
+
