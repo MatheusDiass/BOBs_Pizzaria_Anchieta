@@ -1,7 +1,7 @@
 # Válida o que foi digitado no nome
 def nameValidation(name):
-    while len(name) < 8 or len(name) > 50:
-        print('O nome deve ser maior ou igual á 8 caracteres e menor ou igual á 50 caracteres!')
+    while len(name) < 8 or len(name) > 50 or name.isnumeric():
+        print('O nome deve ser maior ou igual á 8 caracteres e menor ou igual á 50 caracteres, não pode conter números!')
         name = str(input('Digite o nome novamente: '))
 
     return name
@@ -14,10 +14,18 @@ def addressValidation(address):
 
     return address
 
+# Válida o que foi digitado no número
+def numberValidation(number):
+    while not number.isnumeric():
+        print('O número do endereço só pode conter números!')
+        address = str(input('Digite o número novamente: '))
+
+    return number
+
 # Válida o que foi digitado no complemento
 def complementValidation(complement):
-    while len(complement) < 4 or len(complement) > 20:
-        print('O complemento deve ser maior ou igual á 4 caracteres e menor ou igual á 20 caracteres!')
+    while len(complement) < 4 or len(complement) > 20 or complement.isnumeric():
+        print('O complemento deve ser maior ou igual á 4 caracteres e menor ou igual á 20 caracteres, não pode conter números!')
         complement = str(input('Digite o complemento novamente: '))
 
     return complement
@@ -32,16 +40,16 @@ def districtValidation(district):
 
 # Válida o que foi digitado na cidade
 def cityValidation(city):
-    while len(city) < 3 or len(city) > 20:
-        print('A cidade deve ser maior ou igual á 3 caracteres e menor ou igual á 20 caracteres!')
+    while len(city) < 3 or len(city) > 20 or city.isnumeric():
+        print('A cidade deve ser maior ou igual á 3 caracteres e menor ou igual á 20 caracteres, não pode conter números!')
         city = str(input('Digite a cidade novamente: '))
 
     return city
 
 # Válida o que foi digitado no UF
 def ufValidation(uf):
-    while len(uf) != 2:
-        print('O UF deve ter 2 caracteres!')
+    while len(uf) != 2 or uf.isnumeric():
+        print('O UF deve ter 2 caracteres e não pode conter números!')
         uf = str(input('Digite o UF novamente: '))
 
     return uf.upper()

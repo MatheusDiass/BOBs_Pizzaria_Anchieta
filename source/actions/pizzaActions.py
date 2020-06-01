@@ -1,17 +1,24 @@
 # Importa as funções do arquivo da tabela tblpizza para interagir com o banco de dados
 from source.db.tblPizza import save, updateName, updateIngredient, updatePrice, updateType, delete
 
+# Importa as funções de validação do arquivo de validação do cliente
+from source.validation.pizzaValidation import nameValidation, ingredientValidation, typeValidation, priceValidation
+
 # Salva a pizza no banco de dados e trata a exceção caso ocorrer algum erro
 def pizzaRegister():
     print('\nCadastro de pizza\n')
 
     name = str(input('Digite o nome: '))
-
-    type = str(input('Digite o tipo: '))
+    name = nameValidation(name)
 
     ingredient = str(input('Digite os ingredientes: '))
+    ingredient = ingredientValidation(ingredient)
 
-    price = float(input('Digite o valor: '))
+    type = str(input('Digite o tipo: '))
+    type = typeValidation(type)
+
+    price = input('Digite o valor: ')
+    price = priceValidation(price)
 
     inactvated = 0
 
@@ -22,7 +29,7 @@ def pizzaRegister():
         print('\nPizza salva com sucesso!\n')
         input('Pressione qualquer tecla para continuar...')
     except:
-        print('Ocorreu um erro ao cadastrar a pizza.')
+        print('\nOcorreu um erro ao cadastrar a pizza.')
         print('Contate o administrador.\n')
         input('Pressione qualquer tecla para continuar...')
 
@@ -38,10 +45,10 @@ def update(option):
 
         try:
             updateName(cod, name)
-            print('Nome da pizza atualizado com sucesso\n')
+            print('\nNome da pizza atualizado com sucesso\n')
             input('Pressione qualquer tecla para continuar...')
         except:
-            print('Não foi possivel executar a alteração...')
+            print('\nNão foi possivel executar a alteração...\n')
             input('Pressione qualquer tecla para continuar...')
 
     # Número 2 para atualizar os ingredientes
@@ -52,10 +59,10 @@ def update(option):
 
         try:
             updateIngredient(cod, ingredient)
-            print('Ingredientes da pizza atualizados com sucesso\n')
+            print('\nIngredientes da pizza atualizados com sucesso\n')
             input('Pressione qualquer tecla para continuar...')
         except:
-            print('Não foi possivel executar a alteração...')
+            print('\nNão foi possivel executar a alteração...\n')
             input('Pressione qualquer tecla para continuar...')
 
     # Número 3 para atualizar o valor
@@ -66,10 +73,10 @@ def update(option):
 
         try:
             updatePrice(cod, price)
-            print('Valor da pizza atualizado com sucesso\n')
+            print('\nValor da pizza atualizado com sucesso\n')
             input('Pressione qualquer tecla para continuar...')
         except:
-            print('Não foi possivel executar a alteração...')
+            print('\nNão foi possivel executar a alteração...\n')
             input('Pressione qualquer tecla para continuar...')
 
     # Número 4 para atualizar o tipo
@@ -80,10 +87,10 @@ def update(option):
 
         try:
             updateType(cod, type)
-            print('Tipo da pizza atualizado com sucesso\n')
+            print('\nTipo da pizza atualizado com sucesso\n')
             input('Pressione qualquer tecla para continuar...')
         except:
-            print('Não foi possivel executar a alteração...')
+            print('\nNão foi possivel executar a alteração...\n')
             input('Pressione qualquer tecla para continuar...')
 
 # Deleta a pizza do banco de dados
@@ -91,14 +98,7 @@ def delete(cod):
     try:
         delete(cod)
         print('Pizza deletada')
-        input('Pressione qualquer tecla para continuar...')
+        input('\nPressione qualquer tecla para continuar...\n')
     except:
-        print('Não foi possivel executar a alteração...')
+        print('\nNão foi possivel executar a alteração...\n')
         input('Pressione qualquer tecla para continuar...')
-
-
-
-
-
-
-

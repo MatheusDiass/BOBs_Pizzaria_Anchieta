@@ -2,7 +2,7 @@
 from source.db.tblCustomer import save, updateName, updateAddress, updateComplement, updateDistrict, updateCity, updateUf, updateCep, updatePhone, updateCellPhone
 
 # Importa as funções de validação do arquivo de validação do cliente
-from source.validation.customerValidation import nameValidation, addressValidation, complementValidation, districtValidation, cityValidation, ufValidation, cepValidation, phoneValidation, cellPhoneValidation
+from source.validation.customerValidation import nameValidation, addressValidation, numberValidation, complementValidation, districtValidation, cityValidation, ufValidation, cepValidation, phoneValidation, cellPhoneValidation
 
 # Salva o cliente no banco de dados e trata a exceção caso ocorrer algum erro
 def customerRegister():
@@ -13,6 +13,9 @@ def customerRegister():
 
     address = str(input('Digite o endereço: '))
     address = addressValidation(address)
+
+    number = str(input('Digite o número: '))
+    number = numberValidation(number)
 
     complement = str(input('Digite o complemento: '))
     complement = complementValidation(complement)
@@ -38,7 +41,7 @@ def customerRegister():
     cellPhone = str(input('Digte o número de telefone celular: '))
     cellPhone = cellPhoneValidation(cellPhone)
 
-    data_client = ([name, address, complement, district, city, uf, cep, phone, cellPhone])
+    data_client = ([name, address, number, complement, district, city, uf, cep, phone, cellPhone])
 
     try:
         save(data_client)
