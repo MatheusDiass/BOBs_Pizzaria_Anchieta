@@ -1,5 +1,3 @@
-# Importa a função de limpar tela
-from source.actions.cleanAction import cleanScreem
 import os
 import random
 from datetime import datetime
@@ -10,7 +8,7 @@ from source.db.tblOrder import saveOrder, selectCodOrder, updateTotal
 from source.db.tblOrderItems import saveOrderItems
 
 def request():
-    count = 1
+    count = 0
     total = 0
     verifyRequest = 0
     list_itensOrder = []
@@ -38,7 +36,7 @@ def request():
             headerMenu()
             principal()
 
-            # Importa o arquivo de opções do menu principal e a função que realiza a escolha
+            # Importa a função que realiza a escolha das opções do menu principal
             from source.option.principalOption import chooseOptionMenuPrincipal
             chooseOptionMenuPrincipal()
 
@@ -50,7 +48,7 @@ def request():
 
         qtdPizzas = int(input('Digite a quantidade de pizzas do pedido: '))
 
-        while(count <= qtdPizzas):
+        while(count < qtdPizzas):
             codPizza = int(input('Digite o codigo da pizza: '))
 
             listPizzaByCod = selectPizzaByCod(codPizza)

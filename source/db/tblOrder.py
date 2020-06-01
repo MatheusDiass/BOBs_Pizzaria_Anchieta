@@ -34,3 +34,14 @@ def selectCodOrder():
     dict_connection['connection'].close()
 
     return codOrder
+
+def selectAllOrderInformation():
+    dict_connection = dbConnection()
+    dict_connection['cursor'].execute('select * from tblorder')
+
+    listAllOrder = dict_connection['cursor'].fetchall()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
+    return listAllOrder

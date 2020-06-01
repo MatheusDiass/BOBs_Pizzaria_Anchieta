@@ -10,6 +10,7 @@ def dbcreate():
                    (cus_cod integer not null primary key, \
                    cus_name string(50), \
                    cus_address string(50), \
+                   cus_number int, \
                    cus_complement string(20), \
                    cus_district string(20), \
                    cus_city string(20), \

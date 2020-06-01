@@ -4,8 +4,8 @@ from source.db.connection import dbConnection
 # Realiza o cadastro do cliente
 def save(data_client):
     dict_connection = dbConnection()
-    dict_connection['cursor'].execute('insert into tblcustomer(cus_name, cus_address, cus_complement, cus_district, cus_city, cus_uf, cus_cep, cus_phone, cus_cellphone) \
-                    values(?, ?, ?, ?, ?, ?, ?, ?, ?)', data_client)
+    dict_connection['cursor'].execute('insert into tblcustomer(cus_name, cus_address, cus_number, cus_complement, cus_district, cus_city, cus_uf, cus_cep, cus_phone, cus_cellphone) \
+                    values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data_client)
 
     dict_connection['connection'].commit()
 

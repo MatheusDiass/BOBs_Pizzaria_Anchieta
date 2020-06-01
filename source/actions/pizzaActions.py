@@ -1,17 +1,24 @@
 # Importa as funções do arquivo da tabela tblpizza para interagir com o banco de dados
 from source.db.tblPizza import save, updateName, updateIngredient, updatePrice, updateType, delete
 
+# Importa as funções de validação do arquivo de validação do cliente
+from source.validation.pizzaValidation import nameValidation, ingredientValidation, typeValidation, priceValidation
+
 # Salva a pizza no banco de dados e trata a exceção caso ocorrer algum erro
 def pizzaRegister():
     print('\nCadastro de pizza\n')
 
     name = str(input('Digite o nome: '))
-
-    type = str(input('Digite o tipo: '))
+    name = nameValidation(name)
 
     ingredient = str(input('Digite os ingredientes: '))
+    ingredient = ingredientValidation(ingredient)
 
-    price = float(input('Digite o valor: '))
+    type = str(input('Digite o tipo: '))
+    type = typeValidation(type)
+
+    price = input('Digite o valor: ')
+    price = priceValidation(price)
 
     inactvated = 0
 
@@ -62,7 +69,7 @@ def update(option):
     elif option == 3:
         print('\nAtualizar Valor\n')
         cod = int(input('Digite o código da pizza: '))
-        price = float(input('Digite o novo valor para a pizza: '))
+        price = int(input('Digite o novo valor para a pizza: '))
 
         try:
             updatePrice(cod, price)
@@ -91,14 +98,7 @@ def delete(cod):
     try:
         delete(cod)
         print('Pizza deletada')
-        input('Pressione qualquer tecla para continuar...')
+        input('\nPressione qualquer tecla para continuar...\n')
     except:
-        print('Não foi possivel executar a alteração...')
+        print('\nNão foi possivel executar a alteração...\n')
         input('Pressione qualquer tecla para continuar...')
-
-
-
-
-
-
-

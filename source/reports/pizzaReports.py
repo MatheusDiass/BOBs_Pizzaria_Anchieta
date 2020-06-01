@@ -19,9 +19,13 @@ def allPizzaInformationReports():
                 print('Ingredientes: ', pizza[2])
                 print('Tipo: ', pizza[3])
                 print('Valor: ', pizza[4])
-                print('Data Inatividade: ', pizza[5])
-                print('Data Criação: ', pizza[6])
+
+                if(pizza[5] == 1):
+                    print('Data de Inatividade: ', pizza[6])
+
                 print('\n')
+
+        input('Pressione enter para continuar...')
     except:
         print('Não foi possivel acessar as pizzas')
         input('Pressione qualquer tecla para continuar...')
