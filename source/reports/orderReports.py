@@ -1,10 +1,14 @@
+# Import sqlite3 para tratar os erros
+import _sqlite3
+
+# Importa a função de relatório de pedidos
 from source.db.tblOrder import selectAllOrderInformation
 
 def allOrderInformationReports():
 
     try:
-        print('--------------------------------------------')
-        print('\nRelatório de Pedidos - Todos os Dados\n')
+        print('\n--------------------------------------------')
+        print('Relatório de Pedidos - Todos os Pedidos\n')
 
         listAllOrder = selectAllOrderInformation()
 
@@ -13,12 +17,16 @@ def allOrderInformationReports():
 
         else:
             for order in listAllOrder:
-                print('Cod: ', order[0])
-                print('Cliente: ', order[1])
-                print('Data: ', order[2])
-                print('Preço total: ', order[4])
+                print('Cod do Pedido: ', order[0])
+                print('Data do Pedido: ', order[1])
+                print('Nome do Cliente: ', order[2])
+                print('Preço total: ', order[3])
                 print('\n')
-    except:
-        print('Não foi possivel acessar os pedidos')
-        input('Pressione qualquer tecla para continuar...')
+
+            input('Pressione enter para continuar...')
+
+    except _sqlite3.OperationalError as error:
+        print('\nNão foi possivel buscar os clientes')
+        print('Erro: ', error)
+        input('\nPressione enter para continuar...')
 

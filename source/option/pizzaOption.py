@@ -11,7 +11,7 @@ from source.menu.pizzaMenu import pizzaMenu, pizzaMaintenanceMenu, pizzaReportsM
 from source.actions.pizzaActions import pizzaRegister, update
 
 # Importa a função de relatório do arquivo de relatório de pizza
-from source.reports.pizzaReports import allPizzaInformationReports
+from source.reports.pizzaReports import allPizzaInformationReports, onePizzaInformationReports, allPizzaActiveReports, allPizzaInactiveReports, quantityPizzaReports
 
 # De acordo com o número informado entra em uma das opções do menu de pizza
 def chooseOptionMenuPizza():
@@ -19,7 +19,7 @@ def chooseOptionMenuPizza():
 
     while not optionPizza.isnumeric():
         print('Opção Inválida!')
-        input('Pressione qualquer tecla para continuar...')
+        input('Pressione enter para continuar...')
         cleanScreem()
         headerMenu()
         pizzaMenu()
@@ -29,7 +29,7 @@ def chooseOptionMenuPizza():
 
     while optionPizza < 0 or optionPizza > 4:
         print('Opção Inválida!')
-        input('Pressione qualquer tecla para continuar...')
+        input('Pressione enter para continuar...')
         cleanScreem()
         headerMenu()
         pizzaMenu()
@@ -74,7 +74,7 @@ def chooseOptionMaintenancePizza():
 
     while not optionMaintenance.isnumeric():
         print('Opção Inválida!')
-        input('Pressione qualquer tecla para continuar...')
+        input('Pressione enter para continuar...')
         cleanScreem()
         headerMenu()
         pizzaMaintenanceMenu()
@@ -84,7 +84,7 @@ def chooseOptionMaintenancePizza():
 
     while optionMaintenance < 0 or optionMaintenance > 4:
         print('Opção Inválida!')
-        input('Pressione qualquer tecla para continuar...')
+        input('Pressione enter para continuar...')
         cleanScreem()
         pizzaMaintenanceMenu()
         chooseOptionMaintenancePizza()
@@ -112,7 +112,7 @@ def chooseOptionReportsPizza():
 
     while not optionReports.isnumeric():
         print('Opção Inválida!')
-        input('Pressione qualquer tecla para continuar...')
+        input('Pressione enter para continuar...')
         cleanScreem()
         headerMenu()
         pizzaReportsMenu()
@@ -120,9 +120,9 @@ def chooseOptionReportsPizza():
 
     optionReports = int(optionReports)
 
-    while optionReports < 0 or optionReports > 1:
+    while optionReports < 0 or optionReports > 5:
         print('Opção Inválida!')
-        input('Pressione qualquer tecla para continuar...')
+        input('Pressione enter para continuar...')
         cleanScreem()
         pizzaReportsMenu()
         chooseOptionReportsPizza()
@@ -136,9 +136,41 @@ def chooseOptionReportsPizza():
             pizzaMenu()
             chooseOptionMenuPizza()
 
-        # Número 1 exibe na tela o relatório
+        # Número 1 exibe na tela o relatório de todas as pizzas e retorna para o menu principal de pizza
         elif optionReports == 1:
             allPizzaInformationReports()
+            cleanScreem()
+            headerMenu()
+            pizzaMenu()
+            chooseOptionMenuPizza()
+
+        # Número 2 exibe na tela o relatório de uma pizza e retorna para o menu principal de pizza
+        elif optionReports == 2:
+            onePizzaInformationReports()
+            cleanScreem()
+            headerMenu()
+            pizzaMenu()
+            chooseOptionMenuPizza()
+
+        # Número 3 exibe na tela o relatório de todas as pizzas ativas e retorna para o menu principal de pizza
+        elif optionReports == 3:
+            allPizzaActiveReports()
+            cleanScreem()
+            headerMenu()
+            pizzaMenu()
+            chooseOptionMenuPizza()
+
+        # Número 4 exibe na tela o relatório de todas as pizzas inativas e retorna para o menu principal de pizza
+        elif optionReports == 4:
+            allPizzaInactiveReports()
+            cleanScreem()
+            headerMenu()
+            pizzaMenu()
+            chooseOptionMenuPizza()
+
+        # Número 5 exibe na tela o relatório da quantidade de pizzas cadastradas e retorna para o menu principal de pizza
+        elif optionReports == 5:
+            quantityPizzaReports()
             cleanScreem()
             headerMenu()
             pizzaMenu()

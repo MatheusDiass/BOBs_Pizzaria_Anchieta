@@ -2,11 +2,11 @@
 from source.db.connection import dbConnection
 
 # Salva o pedido
-def saveOrder(codCustomer, datetime):
+def saveOrder(codCustomer, date, time):
     dict_connection = dbConnection()
 
-    dict_connection['cursor'].execute('insert into tblorder(ord_clicod, ord_datetime) \
-                        values(?, ?)', (codCustomer, datetime))
+    dict_connection['cursor'].execute('insert into tblorder(ord_clicod, ord_date, ord_time) \
+                        values(?, ?, ?)', (codCustomer, date, time))
 
     dict_connection['connection'].commit()
 
@@ -37,7 +37,8 @@ def selectCodOrder():
 
 def selectAllOrderInformation():
     dict_connection = dbConnection()
-    dict_connection['cursor'].execute('select * from tblorder')
+    dict_connection['cursor'].execute('select o.ord_cod, o.ord_date, c.cus_name, o.ord_totalorder from tblorder as o \
+                                       join tblcustomer as c on c.cus_cod = o.ord_clicod ')
 
     listAllOrder = dict_connection['cursor'].fetchall()
 

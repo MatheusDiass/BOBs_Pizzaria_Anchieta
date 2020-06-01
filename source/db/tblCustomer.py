@@ -94,7 +94,7 @@ def updateCellPhone(cod, cellPhone):
     dict_connection['connection'].close()
 
 # Busca todos os clientes junto de todas as suas informações
-def selectAllClientInformation():
+def selectAllCustomertInformation():
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('select * from tblcustomer')
 
@@ -104,6 +104,30 @@ def selectAllClientInformation():
     dict_connection['connection'].close()
 
     return listAllClientInformation
+
+# Busca apenas um cliente
+def selectCustomerByCod(cod):
+    dict_connection = dbConnection()
+    dict_connection['cursor'].execute('select * from tblcustomer where cus_cod = ?', (cod,))
+
+    oneCustomer = dict_connection['cursor'].fetchone()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
+    return oneCustomer
+
+# Informa o quantidade de clientes cadastrados
+def quantityCustomer():
+    dict_connection = dbConnection()
+    dict_connection['cursor'].execute('select count(cus_cod) from tblcustomer')
+
+    qttCustomer = dict_connection['cursor'].fetchone()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
+    return qttCustomer
 
 # Busca o cliente pelo telefone ou telefone celular
 def searchClientByPhone(phoneClient):

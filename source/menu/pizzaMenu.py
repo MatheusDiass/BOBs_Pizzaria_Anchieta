@@ -20,7 +20,11 @@ def pizzaMaintenanceMenu():
 def pizzaReportsMenu():
     print('\nRelátorios - Pizzas\n')
     print('[0] - Voltar')
-    print('[1] - Todos as pizzas com todas as informações')
+    print('[1] - Todas as pizzas')
+    print('[2] - Uma Pizza')
+    print('[3] - Pizzas Ativas')
+    print('[4] - Pizzas Inativas')
+    print('[5] - Quantidade de pizzas cadastradas')
 
 
 

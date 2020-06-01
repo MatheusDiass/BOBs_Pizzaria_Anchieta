@@ -11,7 +11,7 @@ from source.menu.customerMenu import customerMenu, customerMaintenanceMenu, cust
 from source.actions.customerActions import customerRegister, update
 
 # Importa a função de relatório do arquivo de relatório de cliente
-from source.reports.customerReports import allClientInformationReports
+from source.reports.customerReports import allClientInformationReports, oneCustomerInformationReports,quantityCustomerReports
 
 
 # De acordo com o número informado entra em uma das opções do menu do cliente
@@ -20,7 +20,7 @@ def chooseOptionMenuCustomer():
 
     while not optionCustomer.isnumeric():
         print('Opção Inválida!')
-        input('Pressione qualquer tecla para continuar...')
+        input('Pressione enter para continuar...')
         cleanScreem()
         headerMenu()
         customerMenu()
@@ -77,7 +77,7 @@ def chooseOptionMaintenance():
 
     while not optionMaintenance.isnumeric():
         print('Opção Inválida!')
-        input('Pressione qualquer tecla para continuar...')
+        input('Pressione enter para continuar...')
         cleanScreem()
         headerMenu()
         customerMaintenanceMenu()
@@ -117,7 +117,7 @@ def chooseOptionReports():
 
     while not optionReports.isnumeric():
         print('Opção Inválida!')
-        input('Pressione qualquer tecla para continuar...')
+        input('Pressione enter para continuar...')
         cleanScreem()
         headerMenu()
         customerReportsMenu()
@@ -125,7 +125,7 @@ def chooseOptionReports():
 
     optionReports = int(optionReports)
 
-    while optionReports < 0 or optionReports > 1:
+    while optionReports < 0 or optionReports > 3:
         print('Opção Inválida!')
         input('Pressione enter para continuar...')
         cleanScreem()
@@ -142,10 +142,25 @@ def chooseOptionReports():
             customerMenu()
             chooseOptionMenuCustomer()
 
-        # Número 1 exibe na tela o relatório
+        # Número 1 exibe na tela o relatório de todos os clientes e retorna para o menu principal de cliente
         elif optionReports == 1:
             allClientInformationReports()
-            input('Pressione enter para continuar...')
+            cleanScreem()
+            headerMenu()
+            customerMenu()
+            chooseOptionMenuCustomer()
+
+        # Número 2 exibe na tela o relatório de um cliente e retorna para o menu principal de cliente
+        elif optionReports == 2:
+            oneCustomerInformationReports()
+            cleanScreem()
+            headerMenu()
+            customerMenu()
+            chooseOptionMenuCustomer()
+
+        # Número 3 exibe na tela o relatório da quantidade de clientes cadastrados e retorna para o menu principal de cliente
+        elif optionReports == 3:
+            quantityCustomerReports()
             cleanScreem()
             headerMenu()
             customerMenu()

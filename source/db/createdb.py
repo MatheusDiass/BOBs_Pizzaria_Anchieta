@@ -38,7 +38,8 @@ def dbcreate():
     dict_connection['cursor'].execute('create table if not exists tblorder \
                    (ord_cod integer not null primary key, \
                    ord_clicod integer, \
-                   ord_datetime datetime, \
+                   ord_date date, \
+                   ord_time time, \
                    ord_totalorder decimal(10, 2), \
                    constraint fk_orderclient foreign key(ord_cliCod) references tblclient(cli_cod))')
 

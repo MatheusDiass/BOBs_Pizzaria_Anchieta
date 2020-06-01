@@ -10,7 +10,7 @@ from source.db.tblOrderItems import saveOrderItems
 def request():
     count = 0
     total = 0
-    verifyRequest = 0
+    #1verifyRequest = 0
     list_itensOrder = []
 
     clientPhone = str(input('Digite o telefone do cliente: '))
@@ -44,7 +44,7 @@ def request():
 
         offerCustomersOtherFlavors(oneClient[0])
 
-        saveOrder(oneClient[0], str(datetime.now()))
+        saveOrder(oneClient[0], str(datetime.now().date()), str(datetime.now().time()))
 
         qtdPizzas = int(input('Digite a quantidade de pizzas do pedido: '))
 
@@ -84,7 +84,7 @@ def request():
 
                 total = total + totalPrice
 
-                count += count
+                count += 1
 
         updateTotal(codOrder[0], total)
 
@@ -105,7 +105,7 @@ def offerCustomersOtherFlavors(cod):
         print('\nPizzas á oferecer ao cliente\n')
 
         while count < 3:
-            ran = random.randrange(1, countPizzas[0][0])
+            ran = random.randrange(1, countPizzas[0])
 
             listNameIngredientTypePrice = selectNameIngredientTypePrice(ran)
 

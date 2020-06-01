@@ -65,6 +65,9 @@ def selectPizzaByCod(cod):
 
     listPizzaByCod = dict_connection['cursor'].fetchone()
 
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
     return listPizzaByCod
 
 # Busca todas as pizzas junto de todas as suas informações
@@ -74,6 +77,9 @@ def selectAllPizzaInformation():
 
     listAllPizzaInformation = dict_connection['cursor'].fetchall()
 
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
     return listAllPizzaInformation
 
 # Busca a pizza pelo código, selecionando os campos de código, nome, ingredientes, tipo e preço
@@ -82,6 +88,9 @@ def selectNameIngredientTypePrice(cod):
     dict_connection['cursor'].execute('select piz_cod, piz_name, piz_ingredients, piz_type, piz_price from tblpizza where piz_cod = ?', (cod,))
 
     listNameIngredientTypePrice = dict_connection['cursor'].fetchall()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
 
     return listNameIngredientTypePrice
 
@@ -101,11 +110,49 @@ def selectOrderedPizzas(cod):
 
     return listpizzasNotOrdered
 
+def selectAllPizzaInformation():
+    dict_connection = dbConnection()
+    dict_connection['cursor'].execute('select * from tblpizza')
+
+    listAllPizzas = dict_connection['cursor'].fetchall()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
+    return listAllPizzas
+
+# Busca as pizzas que estão inativadas
+def selectAllPizzaInactive():
+    dict_connection = dbConnection()
+    dict_connection['cursor'].execute('select * from tblpizza where piz_inactivated = 1')
+
+    listAllPizzasInactivated = dict_connection['cursor'].fetchall()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
+    return listAllPizzasInactivated
+
+# Busca as pizzas que estão ativas
+def selectAllPizzaActive():
+    dict_connection = dbConnection()
+    dict_connection['cursor'].execute('select * from tblpizza where piz_inactivated = 0')
+
+    listAllPizzasNoInactivated = dict_connection['cursor'].fetchall()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
+    return listAllPizzasNoInactivated
+
 # Faz a contagem de quantas pizas estão cadastradas
 def selectCountPizzas():
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('select count(piz_cod) from tblpizza')
 
-    countPizzas = dict_connection['cursor'].fetchall()
+    countPizzas = dict_connection['cursor'].fetchone()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
 
     return countPizzas

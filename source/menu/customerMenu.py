@@ -25,4 +25,6 @@ def customerMaintenanceMenu():
 def customerReportsMenu():
     print('\nRelátorios - Cliente\n')
     print('[0] - Voltar')
-    print('[1] - Todos os clientes com todas as informações')
+    print('[1] - Todos os Clientes')
+    print('[2] - Um Cliente')
+    print('[3] - Quantidade de clientes')

@@ -28,7 +28,7 @@ def chooseOptionMenuPrincipal():
 
     while not option.isnumeric():
         print('Opção Inválida!')
-        input('Pressione qualquer tecla para continuar...')
+        input('Pressione enter para continuar...')
         cleanScreem()
         headerMenu()
         principal()
@@ -38,7 +38,7 @@ def chooseOptionMenuPrincipal():
 
     while option < 1 or option > 4:
         print('Opção Inválida!')
-        input('Pressione qualquer tecla para continuar...')
+        input('Pressione enter para continuar...')
         cleanScreem()
         headerMenu()
         principal()
@@ -49,6 +49,10 @@ def chooseOptionMenuPrincipal():
         # Número 1 realiza o pedido
         if option == 1:
             request()
+            cleanScreem()
+            headerMenu()
+            principal()
+            chooseOptionMenuPrincipal()
 
         # Número 2 entra no menu de pedidos
         elif option == 2:
