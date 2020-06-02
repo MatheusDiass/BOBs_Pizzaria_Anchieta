@@ -93,6 +93,15 @@ def updateCellPhone(cod, cellPhone):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
+# Deleta o cliente
+def delete(cod):
+    dict_connection = dbConnection()
+    dict_connection['cursor'].execute('delete from tblcustomer where cus_cod = ?', (cod,))
+    dict_connection['connection'].commit()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
 # Busca todos os clientes junto de todas as suas informações
 def selectAllCustomertInformation():
     dict_connection = dbConnection()

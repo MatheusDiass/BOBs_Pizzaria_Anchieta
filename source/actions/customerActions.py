@@ -1,5 +1,8 @@
+# Para validar erros
+import _sqlite3
+
 # Importa as funções do arquivo da tabela tblcustomer para interagir com o banco de dados
-from source.db.tblCustomer import save, updateName, updateAddress, updateComplement, updateDistrict, updateCity, updateUf, updateCep, updatePhone, updateCellPhone
+from source.db.tblCustomer import save, updateName, updateAddress, updateComplement, updateDistrict, updateCity, updateUf, updateCep, updatePhone, updateCellPhone, delete
 
 # Importa as funções de validação do arquivo de validação do cliente
 from source.validation.customerValidation import nameValidation, addressValidation, numberValidation, complementValidation, districtValidation, cityValidation, ufValidation, cepValidation, phoneValidation, cellPhoneValidation
@@ -174,3 +177,33 @@ def update(option):
         input('Pressione qualquer tecla para continuar...')
 
         updateCellPhone(cod, cellPhone)
+
+# Deleta o cliente
+def deleteCustomer():
+    try:
+        cod = input('Digite o código do cliente: ')
+
+        while not cod.isnumeric():
+            print('Opção Inválida!')
+            cod = input('Digite o código do cliente novamente: ')
+
+        cod = int(cod)
+
+        # Importa "selectOrderCustomer" para realizar uma validação antes de excluir o cliente
+        from source.db.tblOrder import selectOrderCustomer
+        orderCustomer = selectOrderCustomer(cod)
+
+        if not orderCustomer:
+            delete(cod)
+
+            print('\nCliente deletado com sucesso!')
+            input('\nPressione enter para continuar...')
+
+        else:
+            print('\nNão foi possivel deletar pois existem pedidos relacionados a este cliente!')
+            input('\nPressione enter para continuar...')
+
+    except _sqlite3.OperationalError as error:
+        print('\nNão foi possivel buscar os clientes')
+        print('Erro: ', error)
+        input('\nPressione enter para continuar...')

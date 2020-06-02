@@ -4,11 +4,14 @@ from source.actions.cleanAction import cleanScreem
 # Importa as funções que exibe o cabeçalho e o menu principal do arquivo de menu principal
 from source.menu.principalMenu import headerMenu, principal
 
+# Importa função para deletar pedido
+from source.actions.OrderAction import delete
+
 # Importa as funções que exibe o menu principal de pedido e o menu de relatório de pedido, do arquivo de menu do pedido
 from source.menu.orderMenu import orderMenu, reportMenuOrder
 
 # Importa a função de relatório do arquivo de relatório de pedido
-from source.reports.orderReports import allOrderInformationReports
+from source.reports.orderReports import allOrderInformationReports, allOrderBetweenDateReports
 
 def chooseOptionOrderMenu():
     optionOrder = input('Digite a opção desejada:  ')
@@ -40,6 +43,13 @@ def chooseOptionOrderMenu():
             principal()
             chooseOptionMenuPrincipal()
 
+        elif optionOrder == 1:
+            delete()
+            cleanScreem()
+            headerMenu()
+            orderMenu()
+            chooseOptionOrderMenu()
+
         elif optionOrder == 2:
             cleanScreem()
             headerMenu()
@@ -60,7 +70,7 @@ def chooseOrderOptionReports():
 
     optionReports = int(optionReports)
 
-    while optionReports < 0 or optionReports > 1:
+    while optionReports < 0 or optionReports > 2:
         print('Opção Inválida!')
         input('Pressione enter para continuar...')
         cleanScreem()
@@ -79,6 +89,13 @@ def chooseOrderOptionReports():
         # Número 1 exibe na tela o relatório de todos os pedidos e retorna para o menu principal de pedidos
         elif optionReports == 1:
             allOrderInformationReports()
+            cleanScreem()
+            headerMenu()
+            orderMenu()
+            chooseOptionOrderMenu()
+
+        elif optionReports == 2:
+            allOrderBetweenDateReports()
             cleanScreem()
             headerMenu()
             orderMenu()

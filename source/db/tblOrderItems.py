@@ -12,3 +12,13 @@ def saveOrderItems(data_orderItens):
 
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
+
+def deleteOrderItems(cod):
+    dict_connection = dbConnection()
+
+    dict_connection['cursor'].execute('delete from tblorderitems where oit_ordercod = ?', [(cod)])
+
+    dict_connection['connection'].commit()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()

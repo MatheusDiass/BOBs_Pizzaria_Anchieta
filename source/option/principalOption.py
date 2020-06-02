@@ -5,7 +5,7 @@ from source.actions.cleanAction import cleanScreem
 from source.menu.principalMenu import headerMenu, principal
 
 # Importa o arquivo que contém a função que realiza o pedido
-from source.actions.requestAction import request
+from source.actions.OrderAction import request
 
 # Importa as funções que exibe o menu principal do cliente, do arquivo de menu do cliente
 from source.menu.customerMenu import customerMenu

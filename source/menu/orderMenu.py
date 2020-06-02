@@ -10,3 +10,4 @@ def reportMenuOrder():
     print('\nRelatórios - Pedidos\n')
     print('[0] - Voltar')
     print('[1] - Todos os pedidos')
+    print('[2] - Pedidos por Período')

@@ -1,5 +1,8 @@
+# Para validar erros
+import _sqlite3
+
 # Importa as funções do arquivo da tabela tblpizza para interagir com o banco de dados
-from source.db.tblPizza import save, updateName, updateIngredient, updatePrice, updateType, delete
+from source.db.tblPizza import save, updateName, updateIngredient, updatePrice, updateType, deactivate
 
 # Importa as funções de validação do arquivo de validação do cliente
 from source.validation.pizzaValidation import nameValidation, ingredientValidation, typeValidation, priceValidation
@@ -93,12 +96,25 @@ def update(option):
             print('\nNão foi possivel executar a alteração...\n')
             input('Pressione qualquer tecla para continuar...')
 
-# Deleta a pizza do banco de dados
-def delete(cod):
+# Desativar a pizza
+def deactivatePizza():
     try:
-        delete(cod)
-        print('Pizza deletada')
-        input('\nPressione qualquer tecla para continuar...\n')
-    except:
-        print('\nNão foi possivel executar a alteração...\n')
-        input('Pressione qualquer tecla para continuar...')
+        cod = input('Digite o código da pizza:  ')
+
+        while not cod.isnumeric():
+            print('Código Inválido!')
+            cod = input('Digite o código da pizza novamente: ')
+
+        cod = int(cod)
+
+        # Importado para pegar data atual do sistema
+        from datetime import datetime
+        deactivate(cod, str(datetime.now().date()))
+
+        print('\nPizza Desativada!')
+        input('\nPressione enter para continuar...')
+
+    except _sqlite3.OperationalError as error:
+        print('\nNão foi possivel buscar os clientes')
+        print('Erro: ', error)
+        input('\nPressione enter para continuar...')

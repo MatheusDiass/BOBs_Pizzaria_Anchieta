@@ -8,11 +8,10 @@ from source.menu.principalMenu import headerMenu, principal
 from source.menu.customerMenu import customerMenu, customerMaintenanceMenu, customerReportsMenu
 
 # Importa as funções de cadastrar o cliente e atualizar seus dados, do arquivo de ações do cliente
-from source.actions.customerActions import customerRegister, update
+from source.actions.customerActions import customerRegister, update, deleteCustomer
 
 # Importa a função de relatório do arquivo de relatório de cliente
-from source.reports.customerReports import allClientInformationReports, oneCustomerInformationReports,quantityCustomerReports
-
+from source.reports.customerReports import allClientInformationReports, oneCustomerInformationReports, quantityCustomerReports
 
 # De acordo com o número informado entra em uma das opções do menu do cliente
 def chooseOptionMenuCustomer():
@@ -62,6 +61,13 @@ def chooseOptionMenuCustomer():
             headerMenu()
             customerMaintenanceMenu()
             chooseOptionMaintenance()
+
+        elif optionCustomer == 3:
+            deleteCustomer()
+            cleanScreem()
+            headerMenu()
+            customerMenu()
+            chooseOptionMenuCustomer()
 
         # número 4 para entrar no menu de relatório de cliente
         elif optionCustomer == 4:

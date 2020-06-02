@@ -4,7 +4,7 @@ def pizzaMenu():
     print('[0] - Voltar')
     print('[1] - Cadastrar')
     print('[2] - Manutenção')
-    print('[3] - Deletar')
+    print('[3] - Desativar')
     print('[4] - Relatórios')
 
 # Exibe na tela o menu de manutenção de pizzas

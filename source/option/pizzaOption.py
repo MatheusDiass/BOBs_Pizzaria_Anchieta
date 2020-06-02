@@ -8,7 +8,7 @@ from source.menu.principalMenu import headerMenu, principal
 from source.menu.pizzaMenu import pizzaMenu, pizzaMaintenanceMenu, pizzaReportsMenu
 
 # Importa as funções de cadastrar a pizza e atualizar seus dados, do arquivo de ações de pizza
-from source.actions.pizzaActions import pizzaRegister, update
+from source.actions.pizzaActions import pizzaRegister, update, deactivatePizza
 
 # Importa a função de relatório do arquivo de relatório de pizza
 from source.reports.pizzaReports import allPizzaInformationReports, onePizzaInformationReports, allPizzaActiveReports, allPizzaInactiveReports, quantityPizzaReports
@@ -60,6 +60,14 @@ def chooseOptionMenuPizza():
             headerMenu()
             pizzaMaintenanceMenu()
             chooseOptionMaintenancePizza()
+
+        elif optionPizza == 3:
+            deactivatePizza()
+            cleanScreem()
+            headerMenu()
+            pizzaMenu()
+            chooseOptionMenuPizza()
+
 
         # número 4 para entrar no menu de relatório de pizza
         elif optionPizza == 4:

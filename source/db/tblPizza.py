@@ -50,9 +50,9 @@ def updateType(cod, type):
     dict_connection['connection'].close()
 
 # Deleta a pizza
-def delete(cod):
+def deactivate(cod, date):
     dict_connection = dbConnection()
-    dict_connection['cursor'].execute('delete from tblpizza piz_type where piz_cod = ?', (cod))
+    dict_connection['cursor'].execute('update tblpizza set piz_inactivated = 1, piz_inactdate = ? where piz_cod = ?', (date, cod))
     dict_connection['connection'].commit()
 
     dict_connection['cursor'].close()
@@ -61,7 +61,7 @@ def delete(cod):
 # Busca a pizza pelo código
 def selectPizzaByCod(cod):
     dict_connection = dbConnection()
-    dict_connection['cursor'].execute('select * from tblpizza where piz_cod = ?', (cod,))
+    dict_connection['cursor'].execute('select * from tblpizza where piz_cod = ?', [(cod)])
 
     listPizzaByCod = dict_connection['cursor'].fetchone()
 
@@ -85,7 +85,7 @@ def selectAllPizzaInformation():
 # Busca a pizza pelo código, selecionando os campos de código, nome, ingredientes, tipo e preço
 def selectNameIngredientTypePrice(cod):
     dict_connection = dbConnection()
-    dict_connection['cursor'].execute('select piz_cod, piz_name, piz_ingredients, piz_type, piz_price from tblpizza where piz_cod = ?', (cod,))
+    dict_connection['cursor'].execute('select piz_cod, piz_name, piz_ingredients, piz_type, piz_price from tblpizza where piz_cod = ?', [(cod)])
 
     listNameIngredientTypePrice = dict_connection['cursor'].fetchall()
 

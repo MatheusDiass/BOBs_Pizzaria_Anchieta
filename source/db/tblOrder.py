@@ -22,6 +22,16 @@ def updateTotal(cod, total):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
+def deleteOrder(cod):
+    dict_connection = dbConnection()
+
+    dict_connection['cursor'].execute('delete from tblorder where ord_cod = ?', [(cod)])
+
+    dict_connection['connection'].commit()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
 # Busca o código do último pedido cadastrado
 def selectCodOrder():
     dict_connection = dbConnection()
@@ -46,3 +56,28 @@ def selectAllOrderInformation():
     dict_connection['connection'].close()
 
     return listAllOrder
+
+def selectOrderCustomer(cod):
+    dict_connection = dbConnection()
+
+    dict_connection['cursor'].execute('select ord_clicod from tblorder where ord_clicod = ?', [(cod)])
+
+    orderCustomer = dict_connection['cursor'].fetchall()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
+    return orderCustomer
+
+def selectAllOrderBetweenDate(staDate, endDate):
+    dict_connection = dbConnection()
+    dict_connection['cursor'].execute('select o.ord_cod, o.ord_date, c.cus_name, o.ord_totalorder from tblorder as o \
+                                       join tblcustomer as c on c.cus_cod = o.ord_clicod \
+                                       where o.ord_date between ? and ?', (staDate, endDate))
+
+    listAllOrderDate = dict_connection['cursor'].fetchall()
+
+    dict_connection['cursor'].close()
+    dict_connection['connection'].close()
+
+    return listAllOrderDate
