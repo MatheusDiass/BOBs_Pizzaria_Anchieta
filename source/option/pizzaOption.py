@@ -15,8 +15,9 @@ from source.reports.pizzaReports import allPizzaInformationReports, onePizzaInfo
 
 # De acordo com o número informado entra em uma das opções do menu de pizza
 def chooseOptionMenuPizza():
-    optionPizza = input('Digite a opção desejada:  ')
+    optionPizza = input('Digite a opção desejada: ')
 
+    # Valida se apenas números foram digitados
     while not optionPizza.isnumeric():
         print('Opção Inválida!')
         input('Pressione enter para continuar...')
@@ -78,8 +79,9 @@ def chooseOptionMenuPizza():
 
 # De acordo com o número informado entra em uma das opções do menu de manutenção de pizza
 def chooseOptionMaintenancePizza():
-    optionMaintenance = input('Digite a opção desejada:  ')
+    optionMaintenance = input('Digite a opção desejada: ')
 
+    # Valida se apenas números foram digitados
     while not optionMaintenance.isnumeric():
         print('Opção Inválida!')
         input('Pressione enter para continuar...')
@@ -111,13 +113,14 @@ def chooseOptionMaintenancePizza():
             update(optionMaintenance)
             cleanScreem()
             headerMenu()
-            pizzaMenu()
-            chooseOptionMenuPizza()
+            pizzaMaintenanceMenu()
+            chooseOptionMaintenancePizza()
 
 # De acordo com o número informado entra em uma das opções do menu de relatório de pizza
 def chooseOptionReportsPizza():
-    optionReports = input('Digite a opção desejada:  ')
+    optionReports = input('Digite a opção desejada: ')
 
+    # Valida se apenas números foram digitados
     while not optionReports.isnumeric():
         print('Opção Inválida!')
         input('Pressione enter para continuar...')
@@ -144,42 +147,42 @@ def chooseOptionReportsPizza():
             pizzaMenu()
             chooseOptionMenuPizza()
 
-        # Número 1 exibe na tela o relatório de todas as pizzas e retorna para o menu principal de pizza
+        # Número 1 exibe na tela o relatório de todas as pizzas
         elif optionReports == 1:
             allPizzaInformationReports()
             cleanScreem()
             headerMenu()
-            pizzaMenu()
-            chooseOptionMenuPizza()
+            pizzaReportsMenu()
+            chooseOptionReportsPizza()
 
-        # Número 2 exibe na tela o relatório de uma pizza e retorna para o menu principal de pizza
+        # Número 2 exibe na tela o relatório de uma pizza
         elif optionReports == 2:
             onePizzaInformationReports()
             cleanScreem()
             headerMenu()
-            pizzaMenu()
-            chooseOptionMenuPizza()
+            pizzaReportsMenu()
+            chooseOptionReportsPizza()
 
-        # Número 3 exibe na tela o relatório de todas as pizzas ativas e retorna para o menu principal de pizza
+        # Número 3 exibe na tela o relatório de todas as pizzas ativas
         elif optionReports == 3:
             allPizzaActiveReports()
             cleanScreem()
             headerMenu()
-            pizzaMenu()
-            chooseOptionMenuPizza()
+            pizzaReportsMenu()
+            chooseOptionReportsPizza()
 
-        # Número 4 exibe na tela o relatório de todas as pizzas inativas e retorna para o menu principal de pizza
+        # Número 4 exibe na tela o relatório de todas as pizzas inativas
         elif optionReports == 4:
             allPizzaInactiveReports()
             cleanScreem()
             headerMenu()
-            pizzaMenu()
-            chooseOptionMenuPizza()
+            pizzaReportsMenu()
+            chooseOptionReportsPizza()
 
-        # Número 5 exibe na tela o relatório da quantidade de pizzas cadastradas e retorna para o menu principal de pizza
+        # Número 5 exibe na tela o relatório da quantidade de pizzas cadastradas
         elif optionReports == 5:
             quantityPizzaReports()
             cleanScreem()
             headerMenu()
-            pizzaMenu()
-            chooseOptionMenuPizza()
+            pizzaReportsMenu()
+            chooseOptionReportsPizza()

@@ -1,3 +1,14 @@
+# Válida se o código do cliente só contem números
+def pizzaCodValidation(cod):
+    while not cod.isnumeric():
+        print('Opção Inválida!')
+        cod = input('Digite o código da pizza novamente: ')
+
+    cod = int(cod)
+
+    return cod
+
+# Válida o que foi digitado no nome
 def nameValidation(name):
     while len(name) < 4 or len(name) > 50:
         print('O nome deve ser maior ou igual á 4 caracteres e menor ou igual á 50 caracteres!')
@@ -5,22 +16,37 @@ def nameValidation(name):
 
     return name
 
+# Válida o que foi digitado no ingrediente
 def ingredientValidation(ingredient):
     while len(ingredient) < 5 or len(ingredient) > 200:
-        print('O nome tipo ser maior ou igual á 4 caracteres e menor ou igual á 20 caracteres!')
+        print('Os ingredientes deve ser maior ou igual á 5 caracteres e menor ou igual á 200 caracteres!')
         ingredient = str(input('Digite o tipo novamente: '))
 
     return ingredient
 
-def typeValidation(type):
-    while len(type) < 4 or len(type) > 20 or type.isnumeric():
-        print('O nome tipo ser maior ou igual á 4 caracteres e menor ou igual á 20 caracteres!')
-        type = str(input('Digite o tipo novamente: '))
+# Válida o que foi digitado no tipo
+def typeValidation(type, countType):
+    while not type.isnumeric():
+        print('O código do tipo não pode conter letras!'.format(countType))
+        type = input('Digite o código do tipo novamente: ')
+
+    type = int(type)
+
+    while type < 1 or type > countType:
+        print('O código do tipo deve ser maior ou igual a 1 ou menor ou igual a {}!'.format(countType))
+        type = input('Digite o código do tipo novamente: ')
+
+        while not type.isnumeric():
+            print('O código do tipo não pode conter letras!'.format(countType))
+            type = input('Digite o código do tipo novamente: ')
+
+        type = int(type)
 
     return type
 
+# Válida o que foi digitado no preço
 def priceValidation(price):
-    while not price.isdecimal():
+    while not price.replace('.', '').isnumeric():
         print('O preço não pode conter letras!')
         price = str(input('Digite o preço novamente: '))
 

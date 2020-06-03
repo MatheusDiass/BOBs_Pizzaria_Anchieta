@@ -8,206 +8,207 @@ from source.actions.cleanAction import cleanScreem
 import random
 
 # Importado para pegar data e hora atual do sistema
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Importa as funções que exibe o cabeçalho e o menu principal do arquivo de menu principal
 from source.menu.principalMenu import headerMenu, principal
 
 # Importa algumas funções para utilização das pizzas
-from source.db.tblPizza import selectOrderedPizzas, selectNameIngredientTypePrice, selectCountPizzas, selectPizzaByCod
+from source.db.tblPizza import selectOrderedPizzas, selectPizzaByCod
 
 # Importa funções para salvar, selecionar, atualizar e deletar pedido
 from source.db.tblOrder import saveOrder, selectCodOrder, updateTotal, deleteOrder
 
 # Função para realizar pedido
 def request():
-    count = 0
-    total = 0
-    list_itensOrder = []
-    namePizzas = []
+    try:
+        count = 0
+        total = 0
+        list_itensOrder = []
+        namePizzas = []
 
-    clientPhone = str(input('Digite o telefone do cliente: '))
+        clientPhone = str(input('Digite o telefone do cliente: '))
 
-    # Importa função para buscar cliente pelo número de telefone
-    from source.db.tblCustomer import searchClientByPhone
-    oneClient = searchClientByPhone(clientPhone)
+        # Importa função para buscar cliente pelo número de telefone
+        from source.db.tblCustomer import searchClientByPhone
+        oneClient = searchClientByPhone(clientPhone)
 
-    while not oneClient:
-        print('\nCliente não encontrado!')
-        resp = str(input('Deseja fazer a busca novamente (S/N) ?'))
-        resp = resp.upper()
-
-        while 'S' != resp != 'N':
-            print('\nResposta incorreta!')
+        while not oneClient:
+            print('\nCliente não encontrado!')
             resp = str(input('Deseja fazer a busca novamente (S/N) ?'))
             resp = resp.upper()
 
+            while 'S' != resp != 'N':
+                print('\nResposta incorreta!')
+                resp = str(input('Deseja fazer a busca novamente (S/N) ?'))
+                resp = resp.upper()
+
+            else:
+                if resp == 'S':
+                    clientPhone = str(input('Digite o telefone do cliente: '))
+                    oneClient = searchClientByPhone(clientPhone)
+
+            if resp == 'N':
+                cleanScreem()
+                headerMenu()
+                principal()
+
+                # Importa a função que realiza a escolha das opções do menu principal
+                from source.option.principalOption import chooseOptionMenuPrincipal
+                chooseOptionMenuPrincipal()
+
         else:
-            if resp == 'S':
-                clientPhone = str(input('Digite o telefone do cliente: '))
-                oneClient = searchClientByPhone(clientPhone)
 
-        if resp == 'N':
-            cleanScreem()
-            headerMenu()
-            principal()
+            orderPizzaCustomer(oneClient[0])
 
-            # Importa a função que realiza a escolha das opções do menu principal
-            from source.option.principalOption import chooseOptionMenuPrincipal
-            chooseOptionMenuPrincipal()
+            # Cria o pedido no banco de dados
+            saveOrder(oneClient[0], str(datetime.now().date()), str(datetime.now().time()))
 
-    else:
-
-        offerCustomersOtherFlavors(oneClient[0])
-
-        # Cria o pedido no banco de dados
-        saveOrder(oneClient[0], str(datetime.now().date()), str(datetime.now().time()))
-
-        qtdPizzas = input('Digite a quantidade de pizzas do pedido: ')
-
-        # Valida se apenas números foram digitados
-        while not qtdPizzas.isnumeric():
-            print('A quantidade de pizzas não pode conter letras!')
-            qtdPizzas = input('Digite a quantidade de pizzas do pedido novamente: ')
-
-        qtdPizzas = int(qtdPizzas)
-
-        # Realiza um loop com base na quantidade pizza pedida pelo usúario
-        while(count < qtdPizzas):
-            codPizza = input('Digite o codigo da pizza: ')
+            qtdPizzas = input('Digite a quantidade de pizzas do pedido: ')
 
             # Valida se apenas números foram digitados
-            while not codPizza.isnumeric():
-                print('O código da pizza não pode conter letras!')
-                codPizza = input('Digite o codigo da pizza novamente: ')
+            while not qtdPizzas.isnumeric():
+                print('A quantidade de pizzas não pode conter letras!')
+                qtdPizzas = input('Digite a quantidade de pizzas do pedido novamente: ')
 
-            codPizza = int(codPizza)
+            qtdPizzas = int(qtdPizzas)
 
-            listPizzaByCod = selectPizzaByCod(codPizza)
+            # Realiza um loop com base na quantidade pizza pedida pelo usúario
+            while(count < qtdPizzas):
+                codPizza = input('Digite o codigo da pizza: ')
 
-            while not listPizzaByCod:
-                print('Pizza não encontrada!')
-                codPizza = int(input('Digite o codigo da pizza novamente: '))
+                # Valida se apenas números foram digitados
+                while not codPizza.isnumeric():
+                    print('O código da pizza não pode conter letras!')
+                    codPizza = input('Digite o codigo da pizza novamente: ')
+
+                codPizza = int(codPizza)
+
                 listPizzaByCod = selectPizzaByCod(codPizza)
 
-            print('\n')
-            namePizzas.append(listPizzaByCod[1])
+                while not listPizzaByCod or listPizzaByCod[4] == 1:
+                    print('Pizza não encontrada ou inativa!')
+                    codPizza = int(input('Digite o codigo da pizza novamente: '))
+                    listPizzaByCod = selectPizzaByCod(codPizza)
 
-            print('\n[1] - Médio')
-            print('[2] - Grande')
-            print('[3] - Gigante')
-            sizePizza = input('Digite o código do tamanho da pizza: ')
+                print('\n')
+                namePizzas.append(listPizzaByCod[1])
 
-            # Valida se apenas números foram digitado
-            while not sizePizza.isnumeric():
-                print('O código do tamanho só pode conter números!')
-                sizePizza = input('Digite o código do tamanho da pizza novamente: ')
-
-            sizePizza = int(sizePizza)
-
-            print('\n')
-
-            while sizePizza < 1 or sizePizza > 3:
-                print('\nCódigo inválido!')
                 print('\n[1] - Médio')
                 print('[2] - Grande')
                 print('[3] - Gigante')
-                sizePizza = int(input('Digite o código do tamanho da pizza novamente: '))
+                sizePizza = input('Digite o código do tamanho da pizza: ')
+
+                # Valida se apenas números foram digitado
+                while not sizePizza.isnumeric():
+                    print('O código do tamanho só pode conter números!')
+                    sizePizza = input('Digite o código do tamanho da pizza novamente: ')
+
+                sizePizza = int(sizePizza)
+
                 print('\n')
 
-            else:
+                while sizePizza < 1 or sizePizza > 3:
+                    print('\nCódigo inválido!')
+                    print('\n[1] - Médio')
+                    print('[2] - Grande')
+                    print('[3] - Gigante')
+                    sizePizza = int(input('Digite o código do tamanho da pizza novamente: '))
+                    print('\n')
 
-                # Recebe o preço unitário da pizza
-                uniPrice = listPizzaByCod[4]
+                else:
 
-                # Calcula o total da pizza
-                totalPrice = calculatePizzaValue(sizePizza, listPizzaByCod[4])
+                    # Recebe o preço unitário da pizza
+                    uniPrice = listPizzaByCod[4]
 
-                # Recebe código do pedido, busca realizada no banco
-                codOrder = selectCodOrder()
+                    # Calcula o total da pizza
+                    totalPrice = calculatePizzaValue(sizePizza, listPizzaByCod[3])
 
-                item = [codOrder[0], codPizza, sizePizza, uniPrice, totalPrice]
+                    # Recebe código do pedido, busca realizada no banco
+                    codOrder = selectCodOrder()
 
-                list_itensOrder.append(item)
+                    item = [codOrder[0], codPizza, sizePizza, uniPrice, totalPrice]
 
-                # Recebe o total somando todos os itens
-                total = total + totalPrice
+                    list_itensOrder.append(item)
 
-                count += 1
+                    # Recebe o total somando todos os itens
+                    total = total + totalPrice
 
-        # Exibe na tela o total do pedido
-        print('')
-        print('----------------------')
-        print('- Total: {:.2f}'.format(total))
-        print('----------------------')
+                    count += 1
 
-        customerMoney = input('Digite o valor em dinheiro que o clinete irá entregar: ')
+            # Exibe na tela o total do pedido
+            print('')
+            print('----------------------')
+            print('- Total: {:.2f}'.format(total))
+            print('----------------------')
 
-        # Valida se apenas números foram digitados
-        while not customerMoney.isnumeric():
-            print('Valor inválido!')
-            customerMoney = input('Digite o valor em dinheiro que o clinete ira entregar novamente: ')
+            customerMoney = input('Digite o valor em dinheiro que o cliente irá entregar: ')
 
-        customerMoney = float(customerMoney)
+            # Valida se apenas números foram digitados
+            while not customerMoney.replace('.', '').isnumeric():
+                print('Valor inválido!')
+                customerMoney = input('Digite o valor em dinheiro que o cliente irá entregar novamente: ')
 
-        while customerMoney < total:
-            print('O valor digitado não pode ser menor que o total do pedido!')
-            customerMoney = float(input('Digite o valor em dinheiro que o cliete ira entregar novamente: '))
+            customerMoney = float(customerMoney)
 
-        # Armazena o troco do pedido
-        rest = customerMoney - total
+            while customerMoney < total:
+                print('O valor digitado não pode ser menor que o total do pedido!')
+                customerMoney = input('Digite o valor em dinheiro que o cliente irá entregar novamente: ')
+                customerMoney = float(customerMoney)
 
-        # Atualiza o total no pedido do cliente
-        updateTotal(codOrder[0], total)
+            # Armazena o troco do pedido
+            rest = customerMoney - total
 
-        list_itensOrder = tuple(list_itensOrder)
+            delivery = datetime.now() + timedelta(minutes=40)
+            delivery = delivery.strftime('%H:%M')
 
-        # Importa função para salvar os itens do pedido
-        from source.db.tblOrderItems import saveOrderItems
+            # Atualiza o total no pedido do cliente
+            updateTotal(codOrder[0], total)
 
-        # Salva os itens
-        saveOrderItems(list_itensOrder)
+            list_itensOrder = tuple(list_itensOrder)
 
-        # Exibe na tela a nota do pedido
-        print('\n')
-        print('-'*55)
-        print('- Nota\n')
-        print('- Código do Pedido:', codOrder[0])
-        print('- Nome do Cliente:', oneClient[1])
+            # Importa função para salvar os itens do pedido
+            from source.db.tblOrderItems import saveOrderItems
 
-        for name in namePizzas:
-            print('- Item:', name)
+            # Salva os itens
+            saveOrderItems(list_itensOrder)
 
-        print('- Valor total: {:.2f}'.format(total))
-        print('- Troco: {:.2f}'.format(rest))
-        print('-' * 55)
+            # Exibe na tela a nota do pedido
+            print('\n')
+            print('-'*55)
+            print('- Nota\n')
+            print('- Código do Pedido:', codOrder[0])
+            print('- Nome do Cliente:', oneClient[1])
 
-        input('\nPressione qualquer tecla para continuar...')
+            for name in namePizzas:
+                print('- Item:', name)
 
-def offerCustomersOtherFlavors(cod):
-    count = 0
+            print('- Valor total: {:.2f}'.format(total))
+            print('- Troco: {:.2f}'.format(rest))
+            print('- Horario aproximado de entrega:', delivery)
+            print('-' * 55)
 
-    listpizzasNotOrdered = selectOrderedPizzas(cod)
+            input('\nPressione qualquer tecla para continuar...')
 
-    if not listpizzasNotOrdered:
-        countPizzas = selectCountPizzas()
+    except _sqlite3.OperationalError as error:
+        print('\nNão foi realizar o pedido!')
+        print('Erro: ', error)
+        input('\nPressione enter para continuar...')
 
-        print('\nPizzas á oferecer ao cliente\n')
+def orderPizzaCustomer(cod):
+    listPizzaCustomer = selectOrderedPizzas(cod)
 
-        while count < 3:
-            ran = random.randrange(1, countPizzas[0])
+    if not listPizzaCustomer:
+        print('\nCliente não tem pizzas pedidas anteriormente\n')
+        input('Pressione qualquer tecla para continuar...')
 
-            listNameIngredientTypePrice = selectNameIngredientTypePrice(ran)
+    else:
+        print('\nPizzas já pedidas anteriormente pelo cliente\n')
 
-            for pizza in listNameIngredientTypePrice:
-                print('Cod: ', pizza[0])
-                print('Nome: ', pizza[1])
-                print('Ingredientes: ', pizza[2])
-                print('Tipo: ', pizza[3])
-                print('Valor: ', pizza[4])
-                print('\n')
-
-            count += 1
+        for pizza in listPizzaCustomer:
+            print('Coódigo: ', pizza[0])
+            print('Nome: ', pizza[1])
+            print('\n')
 
         input('Pressione qualquer tecla para continuar...')
 
@@ -242,6 +243,6 @@ def delete():
         input('\nPressione enter para continuar...')
 
     except _sqlite3.OperationalError as error:
-        print('\nNão foi possivel buscar os clientes')
+        print('\nNão foi possivel deletar o pedido!')
         print('Erro: ', error)
         input('\nPressione enter para continuar...')

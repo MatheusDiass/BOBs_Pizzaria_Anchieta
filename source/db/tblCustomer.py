@@ -127,16 +127,16 @@ def selectCustomerByCod(cod):
     return oneCustomer
 
 # Informa o quantidade de clientes cadastrados
-def quantityCustomer():
+def selectCountCustomer():
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('select count(cus_cod) from tblcustomer')
 
-    qttCustomer = dict_connection['cursor'].fetchone()
+    countCustomer = dict_connection['cursor'].fetchone()
 
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
-    return qttCustomer
+    return countCustomer
 
 # Busca o cliente pelo telefone ou telefone celular
 def searchClientByPhone(phoneClient):

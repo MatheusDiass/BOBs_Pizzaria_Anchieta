@@ -1,3 +1,4 @@
+import os
 # Importa a função de conexão do arquivo de conexão
 from source.db.connection import dbConnection
 
@@ -5,7 +6,7 @@ from source.db.connection import dbConnection
 def save(data_pizza):
     dict_connection = dbConnection()
 
-    dict_connection['cursor'].execute('insert into tblpizza(piz_name,piz_ingredients, piz_type,  piz_price, piz_inactivated) \
+    dict_connection['cursor'].execute('insert into tblpizza(piz_name, piz_ingredients, piz_price, piz_inactivated, piz_typecod) \
                     values(?, ?, ?, ?, ?)', data_pizza)
 
     dict_connection['connection'].commit()
@@ -43,7 +44,7 @@ def updatePrice(cod, price):
 # Atualiza o tipo
 def updateType(cod, type):
     dict_connection = dbConnection()
-    dict_connection['cursor'].execute('update tblpizza set piz_type = ? where piz_cod = ?', (type, cod))
+    dict_connection['cursor'].execute('update tblpizza set piz_typecod = ? where piz_cod = ?', (type, cod))
     dict_connection['connection'].commit()
 
     dict_connection['cursor'].close()
@@ -61,7 +62,9 @@ def deactivate(cod, date):
 # Busca a pizza pelo código
 def selectPizzaByCod(cod):
     dict_connection = dbConnection()
-    dict_connection['cursor'].execute('select * from tblpizza where piz_cod = ?', [(cod)])
+    dict_connection['cursor'].execute('select * from tblpizza as p \
+                                      join tblpizzatype as t on t.pit_cod = p.piz_typecod \
+                                      where piz_cod = ?', [(cod)])
 
     listPizzaByCod = dict_connection['cursor'].fetchone()
 
@@ -71,7 +74,7 @@ def selectPizzaByCod(cod):
     return listPizzaByCod
 
 # Busca todas as pizzas junto de todas as suas informações
-def selectAllPizzaInformation():
+'''def selectAllPizzaInformation():
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('select * from tblpizza')
 
@@ -80,10 +83,10 @@ def selectAllPizzaInformation():
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
-    return listAllPizzaInformation
+    return listAllPizzaInformation'''
 
 # Busca a pizza pelo código, selecionando os campos de código, nome, ingredientes, tipo e preço
-def selectNameIngredientTypePrice(cod):
+'''def selectNameIngredientTypePrice(cod):
     dict_connection = dbConnection()
     dict_connection['cursor'].execute('select piz_cod, piz_name, piz_ingredients, piz_type, piz_price from tblpizza where piz_cod = ?', [(cod)])
 
@@ -92,16 +95,16 @@ def selectNameIngredientTypePrice(cod):
     dict_connection['cursor'].close()
     dict_connection['connection'].close()
 
-    return listNameIngredientTypePrice
+    return listNameIngredientTypePrice'''
 
 # Busca o código das pizzas que o cliente já tenha feito o pedido alguma vez
 def selectOrderedPizzas(cod):
     dict_connection = dbConnection()
-    dict_connection['cursor'].execute('select piz_cod from tblpizza as p\
-                                        join tblorderitems as i on i.oit_pizzacod = p.piz_cod \
-                                        join tblorder as o on o.ord_cod = i.oit_ordercod \
-                                        join tblcustomer as c on c.cus_cod = o.ord_clicod \
-                                        where c.cus_cod = ?', (cod,))
+    dict_connection['cursor'].execute('select distinct p.piz_cod, p.piz_name from tblpizza as p \
+                                      join tblorderitems as i on i.oit_pizzacod = p.piz_cod \
+                                      join tblorder as o on o.ord_cod = i.oit_ordercod \
+                                      join tblcustomer as c on c.cus_cod = o.ord_clicod \
+                                      where c.cus_cod = ?', (cod,))
 
     listpizzasNotOrdered = dict_connection['cursor'].fetchall()
 
@@ -110,9 +113,11 @@ def selectOrderedPizzas(cod):
 
     return listpizzasNotOrdered
 
+# Busca todas as pizzas junto de todas as suas informações
 def selectAllPizzaInformation():
     dict_connection = dbConnection()
-    dict_connection['cursor'].execute('select * from tblpizza')
+    dict_connection['cursor'].execute('select * from tblpizza as p \
+                                      join tblpizzatype as t on t.pit_cod = p.piz_typecod')
 
     listAllPizzas = dict_connection['cursor'].fetchall()
 
@@ -124,7 +129,10 @@ def selectAllPizzaInformation():
 # Busca as pizzas que estão inativadas
 def selectAllPizzaInactive():
     dict_connection = dbConnection()
-    dict_connection['cursor'].execute('select * from tblpizza where piz_inactivated = 1')
+
+    dict_connection['cursor'].execute('select * from tblpizza as p \
+                                      join tblpizzatype as t on t.pit_cod = p.piz_typecod \
+                                      where piz_inactivated = 1')
 
     listAllPizzasInactivated = dict_connection['cursor'].fetchall()
 
@@ -136,7 +144,10 @@ def selectAllPizzaInactive():
 # Busca as pizzas que estão ativas
 def selectAllPizzaActive():
     dict_connection = dbConnection()
-    dict_connection['cursor'].execute('select * from tblpizza where piz_inactivated = 0')
+
+    dict_connection['cursor'].execute('select * from tblpizza as p \
+                                          join tblpizzatype as t on t.pit_cod = p.piz_typecod \
+                                          where piz_inactivated = 0')
 
     listAllPizzasNoInactivated = dict_connection['cursor'].fetchall()
 

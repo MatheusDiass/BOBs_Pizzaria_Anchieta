@@ -6,5 +6,5 @@ def dbConnection():
     path = 'C:\\Users\Matheus Dias\Documents\GitHub_MyProjects\BOBs_Pizzaria_Anchieta\data\db_bobsPizzaria'
     connection = _sqlite3.connect(path)
     cursor = connection.cursor()
-    dict_connection = {'connection': connection, 'cursor': cursor}
+    dict_connection = {'connection': connection, 'cursor': cursor, 'path': path}
     return dict_connection

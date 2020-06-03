@@ -14,8 +14,9 @@ from source.menu.orderMenu import orderMenu, reportMenuOrder
 from source.reports.orderReports import allOrderInformationReports, allOrderBetweenDateReports
 
 def chooseOptionOrderMenu():
-    optionOrder = input('Digite a opção desejada:  ')
+    optionOrder = input('Digite a opção desejada: ')
 
+    # Valida se apenas números foram digitados
     while not optionOrder.isnumeric():
         print('Opção Inválida!')
         input('Pressione enter para continuar...')
@@ -58,8 +59,9 @@ def chooseOptionOrderMenu():
 
 
 def chooseOrderOptionReports():
-    optionReports = input('Digite a opção desejada:  ')
+    optionReports = input('Digite a opção desejada: ')
 
+    # Valida se apenas números foram digitados
     while not optionReports.isnumeric():
         print('Opção Inválida!')
         input('Pressione enter para continuar...')
@@ -74,6 +76,7 @@ def chooseOrderOptionReports():
         print('Opção Inválida!')
         input('Pressione enter para continuar...')
         cleanScreem()
+        headerMenu()
         reportMenuOrder()
         chooseOrderOptionReports()
 
@@ -86,17 +89,18 @@ def chooseOrderOptionReports():
             orderMenu()
             chooseOptionOrderMenu()
 
-        # Número 1 exibe na tela o relatório de todos os pedidos e retorna para o menu principal de pedidos
+        # Número 1 exibe na tela o relatório de todos os pedidos
         elif optionReports == 1:
             allOrderInformationReports()
             cleanScreem()
             headerMenu()
-            orderMenu()
-            chooseOptionOrderMenu()
+            reportMenuOrder()
+            chooseOrderOptionReports()
 
+        # Número 2 exibe na tela o relatório de todos os pedidos de acordo com o periodo informado
         elif optionReports == 2:
             allOrderBetweenDateReports()
             cleanScreem()
             headerMenu()
-            orderMenu()
-            chooseOptionOrderMenu()
+            reportMenuOrder()
+            chooseOrderOptionReports()

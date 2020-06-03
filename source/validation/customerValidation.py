@@ -1,3 +1,13 @@
+# Válida se o código do cliente só contem números
+def customerCodValidation(cod):
+    while not cod.isnumeric():
+        print('Opção Inválida!')
+        cod = input('Digite o código do cliente novamente: ')
+
+    cod = int(cod)
+
+    return cod
+
 # Válida o que foi digitado no nome
 def nameValidation(name):
     while len(name) < 8 or len(name) > 50 or name.isnumeric():

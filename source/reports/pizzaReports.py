@@ -13,6 +13,7 @@ def allPizzaInformationReports():
         print('\n--------------------------------------------')
         print('Relatório de Pizzas - Todas as Pizzas\n')
 
+        countPizzas = selectCountPizzas()
         listAllPizzaInformation = selectAllPizzaInformation()
 
         if len(listAllPizzaInformation) == 0:
@@ -20,15 +21,25 @@ def allPizzaInformationReports():
             input('Pressione enter para continuar...')
 
         else:
+
+            print('Total de pizzas cadastradas: {}\n'.format(countPizzas[0]))
+
             for pizza in listAllPizzaInformation:
+                averagePrice = pizza[3] + (pizza[3] * 0.15)
+                bigPrice = pizza[3] + (pizza[3] * 0.25)
+                giantPrice = pizza[3] + (pizza[3] * 0.35)
+
                 print('Cod:', pizza[0])
                 print('Nome:', pizza[1])
                 print('Ingredientes:', pizza[2])
-                print('Tipo:', pizza[3])
-                print('Valor: {0:.2f}'.format(pizza[4]))
+                print('Tipo:', pizza[8])
+                print('Preço Padrão: {:.2f}'.format(pizza[3]))
+                print('Preço tamanho médio: {:.2f}'.format(averagePrice))
+                print('Preço tamanho grande: {:.2f}'.format(bigPrice))
+                print('preço tamanho gigante: {:.2f}'.format(giantPrice))
 
-                if(pizza[5] == 1):
-                    print('Data de Inatividade:', datetime.strftime(datetime.strptime(pizza[6], '%Y-%m-%d'), '%d/%m/%Y'))
+                if (pizza[4] == 1):
+                    print('Data e hora da inativação:', datetime.strftime(datetime.strptime(pizza[5], '%Y-%m-%d %H:%M:%S.%f'), '%d/%m/%Y %H:%M'))
 
                 print('\n')
 
@@ -60,20 +71,21 @@ def onePizzaInformationReports():
             input('Pressione enter para continuar...')
 
         else:
-            averagePrice = onePizza[4] + (onePizza[4] * 0.15)
-            bigPrice = onePizza[4] + (onePizza[4] * 0.25)
-            giantPrice = onePizza[4] + (onePizza[4] * 0.35)
+            averagePrice = onePizza[3] + (onePizza[3] * 0.15)
+            bigPrice = onePizza[3] + (onePizza[3] * 0.25)
+            giantPrice = onePizza[3] + (onePizza[3] * 0.35)
 
             print('Cod:', onePizza[0])
             print('Nome:', onePizza[1])
             print('Ingredientes:', onePizza[2])
-            print('Tipo: ', onePizza[3])
-            print('Valor tamanho médio: {:.2f}'.format(averagePrice))
-            print('Valor tamanho grande: {:.2f}'.format(bigPrice))
-            print('Valor tamanho gigante: {:.2f}'.format(giantPrice))
+            print('Tipo:', onePizza[8])
+            print('Preço Padrão: {:.2f}'.format(onePizza[3]))
+            print('Preço tamanho médio: {:.2f}'.format(averagePrice))
+            print('Preço tamanho grande: {:.2f}'.format(bigPrice))
+            print('preço tamanho gigante: {:.2f}'.format(giantPrice))
 
-            if(onePizza[5] == 1):
-                print('Data de Inatividade:', datetime.strftime(datetime.strptime(onePizza[6], '%Y-%m-%d'), '%d/%m/%Y'))
+            if(onePizza[4] == 1):
+                print('Data e hora da inativação:', datetime.strftime(datetime.strptime(onePizza[5], '%Y-%m-%d %H:%M:%S.%f'), '%d/%m/%Y %H:%M'))
 
             print('\n')
 
@@ -98,17 +110,18 @@ def allPizzaActiveReports():
 
         else:
             for pizza in listPizzaActive:
-                averagePrice = pizza[4] + (pizza[4] * 0.15)
-                bigPrice = pizza[4] + (pizza[4] * 0.25)
-                giantPrice = pizza[4] + (pizza[4] * 0.35)
+                averagePrice = pizza[3] + (pizza[3] * 0.15)
+                bigPrice = pizza[3] + (pizza[3] * 0.25)
+                giantPrice = pizza[3] + (pizza[3] * 0.35)
 
                 print('Cod:', pizza[0])
                 print('Nome:', pizza[1])
                 print('Ingredientes:', pizza[2])
-                print('Tipo: ', pizza[3])
-                print('Valor tamanho médio: {:.2f}'.format(averagePrice))
-                print('Valor tamanho grande: {:.2f}'.format(bigPrice))
-                print('Valor tamanho gigante: {:.2f}'.format(giantPrice))
+                print('Tipo:', pizza[8])
+                print('Preço Padrão: {:.2f}'.format(pizza[3]))
+                print('Preço tamanho médio: {:.2f}'.format(averagePrice))
+                print('Preço tamanho grande: {:.2f}'.format(bigPrice))
+                print('Preço tamanho gigante: {:.2f}'.format(giantPrice))
                 print('\n')
 
             input('Pressione enter para continuar...')
@@ -143,11 +156,12 @@ def allPizzaInactiveReports():
                 print('Cod:', pizza[0])
                 print('Nome:', pizza[1])
                 print('Ingredientes:', pizza[2])
-                print('Tipo: ', pizza[3])
-                print('Valor tamanho médio: {:.2f}'.format(averagePrice))
-                print('Valor tamanho grande: {:.2f}'.format(bigPrice))
-                print('Valor tamanho gigante: {:.2f}'.format(giantPrice))
-                print('Data da inativação:', datetime.strftime(datetime.strptime(pizza[6], '%Y-%m-%d'), '%d/%m/%Y'))
+                print('Tipo: ', pizza[8])
+                print('Preço Padrão: {:.2f}'.format(pizza[3]))
+                print('Preço tamanho médio: {:.2f}'.format(averagePrice))
+                print('Preço tamanho grande: {:.2f}'.format(bigPrice))
+                print('Preço tamanho gigante: {:.2f}'.format(giantPrice))
+                print('Data e hora da inativação:', datetime.strftime(datetime.strptime(pizza[5], '%Y-%m-%d %H:%M:%S.%f'), '%d/%m/%Y %H:%M'))
                 print('\n')
 
             input('Pressione enter para continuar...')
@@ -166,7 +180,7 @@ def quantityPizzaReports():
 
         qttPizzas = selectCountPizzas()
 
-        print('Quantidade de pizzas cadastrados: ', qttPizzas[0][0])
+        print('Quantidade de pizzas cadastradas: ', qttPizzas[0])
         input('\nPressione enter para continuar...')
 
     except _sqlite3.OperationalError as error:
